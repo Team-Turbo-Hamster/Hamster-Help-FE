@@ -1,13 +1,16 @@
 import React from "react";
-import { Paper } from "@mui/material";
-import ButtonComponent from "./components/ButtonComponent";
+import { Routes, Route } from "react-router-dom";
+
+import Layout from "./components/Layout";
+import Tutor from "./pages/Tutor";
+
 function App() {
   return (
-    <div className="App">
-      <Paper sx={{ width: "400px", height: "400px" }}>
-        <ButtonComponent />
-      </Paper>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="tutor" element={<Tutor />} />
+      </Route>
+    </Routes>
   );
 }
 

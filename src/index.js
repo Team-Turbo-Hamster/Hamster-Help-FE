@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
@@ -8,10 +10,12 @@ import { CssBaseline } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorModeContextProvider>
-      <CssBaseline />
-      <App />
-    </ColorModeContextProvider>
+    <BrowserRouter>
+      <ColorModeContextProvider>
+        <CssBaseline />
+        <App />
+      </ColorModeContextProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
