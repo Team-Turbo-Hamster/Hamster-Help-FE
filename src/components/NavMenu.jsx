@@ -2,7 +2,10 @@ import { Typography, Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const pages = [{ title: "Tutor", url: "tutor" }];
+const pages = [
+  { title: "Tutor", url: "tutor" },
+  { title: "Cloudinary Test", url: "cloudinary" },
+];
 
 const NavMenu = ({ anchorElNav, setAnchorElNav, handleCloseNavMenu }) => {
   const handleOpenNavMenu = (event) => {

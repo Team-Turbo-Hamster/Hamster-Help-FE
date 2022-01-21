@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import Tutor from "./pages/Tutor";
+import CloudinaryTest from "./pages/CloudinaryTest";
 
 function App() {
   return (
