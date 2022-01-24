@@ -1,4 +1,4 @@
-// import { initialLogin } from "../components/Login";
+import InitialLogin from "../components/Login";
 
 const Login = () => {
   return (
@@ -7,6 +7,7 @@ const Login = () => {
       <div> Our Logo dot png</div>
       <div> This will be the stack button </div>
       <p> Please Login </p>
+      <div>{InitialLogin()}</div>
     </div>
   );
 };
