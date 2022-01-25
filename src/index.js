@@ -12,8 +12,10 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ColorModeContextProvider>
+      <AuthProvider>
         <CssBaseline />
         <App />
+        </AuthProvider>
       </ColorModeContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
