@@ -25,7 +25,6 @@ const InitialLogin = () => {
   const handleSubmit = (event) => {
     console.log("submit: ", values)
     console.log(event)
-    setValues({ ...values, username: event.target[0].value, password: event.target[2].value,});
     event.preventDefault()
   }
 
