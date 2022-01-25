@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import useAuth from "./contexts/useAuth"
+//import useAuth from "./contexts/useAuth"
 import Layout from "./components/Layout";
 import Tutor from "./pages/Tutor";
 import CloudinaryTest from "./pages/CloudinaryTest";
 import Login from "./pages/Login.page";
 
 function App() {
-  const {}= useAuth()
+ // const {}= useAuth()
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
