@@ -1,4 +1,4 @@
-import { Button, TextField, InputLabel, FilledInput, InputAdornment, IconButton } from "@mui/material";
+import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 
@@ -8,6 +8,7 @@ const InitialLogin = () => {
   const handleChange = (prop) => (event) => {
     event.preventDefault();
     setValues({ ...values, [prop]: event.target.value, });
+
   };
 
   const handleClickShowPassword = () => {
@@ -30,12 +31,17 @@ const InitialLogin = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextField helperText="Please enter your username" label="User" placeholder="Name" onChange={handleChange('username')}  />
-      <InputLabel htmlFor="passwordField">Password</InputLabel>
-      <FilledInput
+    <FormControl sx={{ m: 1, width: '30ch' }}>
+    <InputLabel>Username</InputLabel>
+      <OutlinedInput id="usernameField" label="Username" helpertext="Please enter your username" onChange={handleChange('username')}  />
+      </FormControl><br />
+      <FormControl sx={{ m: 1, width: '30ch' }}>
+      <InputLabel>Password</InputLabel>
+      <OutlinedInput
         id="passwordField"
         type={values.showPassword ? "text" : "password"}
         value={values.password}
+        label="password"
         onChange={handleChange('password')}
         endAdornment={
           <InputAdornment position="end">
@@ -49,11 +55,12 @@ const InitialLogin = () => {
             </IconButton>
           </InputAdornment>
         }
-      />
+        />
+        </FormControl><br />
       <Button variant="text" type="Submit">
         Submit 
       </Button>
-    </form>
+      </form>
   );
 };
 
