@@ -1,19 +1,21 @@
 import InitialLogin from "../components/Login";
 import { Button, Box, Typography } from "@mui/material";
 
-const Login = () => {
+
+const LoginPage = () => {
   return (
     <Box sx={{ display: "grid", bgcolor: "primary.dark" }}>
       <Typography variant="h1"> Welcome to Hamster Help </Typography>
       <img src="" alt="Our Logo" />
       <div>
-        {" "}
-        <Button>Open Stack</Button>{" "}
+        <Button>Open Stack</Button>
       </div>
       <p> Please Login </p>
-      <div>{InitialLogin()}</div>
+      <div>
+        <Login />
+      </div>
     </Box>
   );
 };
 
-export default Login;
+export default LoginPage;
