@@ -1,6 +1,5 @@
-import InitialLogin from "../components/Login";
+import Login from "../components/Login";
 import { Button, Box, Typography } from "@mui/material";
-
 
 const LoginPage = () => {
   return (
