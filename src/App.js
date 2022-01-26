@@ -7,6 +7,8 @@ import LoginPage from "./pages/Login.page";
 import NewUser from "./pages/NewUser.page";
 
 function App() {
+
+
   const { user } = useAuth();
 
   return (
@@ -23,6 +25,7 @@ function App() {
         <LoginPage />
       )}
     </div>
+
   );
 }
 

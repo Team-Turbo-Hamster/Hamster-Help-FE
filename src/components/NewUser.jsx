@@ -1,15 +1,11 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+
+import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Box } from "@mui/material";
+
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 
 const NewUserForm = () => {
+
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -24,6 +20,7 @@ const NewUserForm = () => {
   const handleChange = (prop) => (event) => {
     event.preventDefault();
     setValues({ ...values, [prop]: event.target.value });
+
   };
 
   const handleBlur = (prop) => (event) => {
@@ -53,6 +50,7 @@ const NewUserForm = () => {
   };
 
   const handlePasswordVerify = () => {
+
     values.password === values.passwordVerify
       ? console.log("it matches!")
       : console.log("it doesn't match!");
