@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <Box sx={{ background: "primary.dark" }}>
       <h1> Welcome to Hamster Help </h1>
-      <div> Our Logo dot png</div>
+      <div> Our Logo dot png </div>
       <div>
         {" "}
         <Button>Open Stack</Button>{" "}
