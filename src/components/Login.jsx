@@ -1,20 +1,16 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import useAuth from "../contexts/useAuth";
 
-const InitialLogin = () => {
+const Login = () => {
   const [values, setValues] = useState({
-    username: "",
-    password: "",
-    showPassword: false,
+    username: "quatre@email.com",
+    password: "123456677",
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { signIn } = useAuth();
 
   const handleChange = (prop) => (event) => {
     event.preventDefault();
@@ -22,10 +18,7 @@ const InitialLogin = () => {
   };
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword((prevState) => !prevState);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -33,9 +26,12 @@ const InitialLogin = () => {
   };
 
   const handleSubmit = (event) => {
-    console.log("submit: ", values);
-    console.log(event);
     event.preventDefault();
+    signIn(values);
+    setValues({
+      username: "",
+      password: "",
+    });
   };
 
   return (
@@ -45,7 +41,8 @@ const InitialLogin = () => {
         <OutlinedInput
           id="usernameField"
           label="Username"
-          helpertext="Please enter your username"
+          value={values.username}
+          helperext="Please enter your username"
           onChange={handleChange("username")}
         />
       </FormControl>
@@ -54,7 +51,7 @@ const InitialLogin = () => {
         <InputLabel>Password</InputLabel>
         <OutlinedInput
           id="passwordField"
-          type={values.showPassword ? "text" : "password"}
+          type={showPassword ? "text" : "password"}
           value={values.password}
           label="password"
           onChange={handleChange("password")}
@@ -80,4 +77,4 @@ const InitialLogin = () => {
   );
 };
 
-export default InitialLogin;
+export default Login;
