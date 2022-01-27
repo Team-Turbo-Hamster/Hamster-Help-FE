@@ -5,6 +5,7 @@ import { getTicketById } from "../utils/ticketRequests";
 import { useParams } from "react-router-dom";
 import * as moment from "moment";
 import { getUserById } from "../utils/userRequests";
+import { Image } from "cloudinary-react";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -23,12 +24,11 @@ const Ticket = () => {
   useEffect(() => {
     if (ticket) {
       getUserById(ticket.user).then((data2) => {
-        console.log(data2, "-----------------");
         setUser(data2);
       });
     }
   }, [ticket]);
-
+  console.log(ticket);
   return (
     <Container maxWidth="md">
       {ticket && user ? (
@@ -63,7 +63,15 @@ const Ticket = () => {
                 <Typography variant="body1">{ticket.body}</Typography>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
-                image gallery
+                {ticket.images.map((image) => (
+                  <Image
+                    key={image}
+                    width="100"
+                    cloudName="turbo-hamster"
+                    crop="scale"
+                    publicId={image}
+                  />
+                ))}
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
                 <Grid container>

@@ -46,7 +46,6 @@ const CreateTicket = () => {
 
   const submitTicket = () => {
     const tagsArray = tagsInput.split(" ");
-    console.log(tagsArray);
     const ticket = {
       title,
       body,
@@ -56,7 +55,9 @@ const CreateTicket = () => {
     };
 
     if (ticket.title.length > 0 && ticket.body.length > 0) {
-      createTicket(ticket);
+      createTicket(ticket).then((data) => {
+        navigate(`/tickets/${data.id}`);
+      });
       setErrorInput(false);
     } else {
       setErrorInput(true);
