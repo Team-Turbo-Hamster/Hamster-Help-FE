@@ -8,16 +8,13 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
-import useAuth from "../contexts/useAuth";
 
-const Login = () => {
+const InitialLogin = () => {
   const [values, setValues] = useState({
-    username: "quatre@email.com",
-    password: "123456677",
+    username: "",
+    password: "",
+    showPassword: false,
   });
-  const [showPassword, setShowPassword] = useState(false);
-
-  const { signIn } = useAuth();
 
   const handleChange = (prop) => (event) => {
     event.preventDefault();
@@ -25,7 +22,10 @@ const Login = () => {
   };
 
   const handleClickShowPassword = () => {
-    setShowPassword((prevState) => !prevState);
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
   };
 
   const handleMouseDownPassword = (event) => {
@@ -33,12 +33,9 @@ const Login = () => {
   };
 
   const handleSubmit = (event) => {
+    console.log("submit: ", values);
+    console.log(event);
     event.preventDefault();
-    signIn(values);
-    setValues({
-      username: "",
-      password: "",
-    });
   };
 
   return (
@@ -48,8 +45,7 @@ const Login = () => {
         <OutlinedInput
           id="usernameField"
           label="Username"
-          value={values.username}
-          helperext="Please enter your username"
+          helpertext="Please enter your username"
           onChange={handleChange("username")}
         />
       </FormControl>
@@ -58,7 +54,7 @@ const Login = () => {
         <InputLabel>Password</InputLabel>
         <OutlinedInput
           id="passwordField"
-          type={showPassword ? "text" : "password"}
+          type={values.showPassword ? "text" : "password"}
           value={values.password}
           label="password"
           onChange={handleChange("password")}
@@ -84,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default InitialLogin;
