@@ -1,26 +1,29 @@
-import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
+import { Button, FormControl, FormControlLabel, Switch, InputLabel, OutlinedInput, InputAdornment, IconButton, Alert } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const NewUserForm = () => {
-  const [values, setValues] = useState({ username: "", password: "", passwordVerify: "", showPassword: false });
-  const [tests, setTests] = useEffect({username: /^[a-zA-Z\s-]{1,30}$/, password: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^[a-zA-Z0-9!@#$%^&*]{6,30}$/, passwordVerify: ""})
-  const [testsPassed, setTestsPassed] = useEffect({})
+  const [values, setValues] = useState({ username: "", password: "", passwordVerify: "", email: "", isATutor: false, showPassword: false });
+  const tests = {username: /^[a-zA-Z\s-]{1,30}$/, password: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^[a-zA-Z0-9!@#$%^&*]{6,30}$/, email: /[+*?^$./\w]+@\w+\.\w+/}
+  const [testsPassed, setTestsPassed] = useState({})
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
   const handleChange = (prop) => (event) => {
     event.preventDefault();
     setValues({ ...values, [prop]: event.target.value, });
-
+    
   };
 
-  const handleBlur = (prop) => (event) => {
-    console.log(prop)
-    console.log(tests.prop)
-    // let test = new RegExp(tests.prop)
-
-    // test.test(values.prop) ? setTestsPassed(...testsPassed, [prop] = true) : setTestsPassed(...testsPassed, [prop] = false);
-    console.log(testsPassed)
+  const handleBlur = (prop) => () => {
+    let test = new RegExp(tests[prop])
+    test.test(values[prop]) ? setTestsPassed({...testsPassed, [prop]: true}) : setTestsPassed({...testsPassed,  [prop]: false});
+    handlePasswordVerify();
+    handleFormComplete();
   };
+
+  const setTutor = (event) => {
+   setValues({...values, isATutor: event.target.checked})
+  }
 
   const handleClickShowPassword = () => {
     setValues({
@@ -33,25 +36,55 @@ const NewUserForm = () => {
     event.preventDefault();
   };
 
+  
+  const handlePasswordVerify = () => {
+    values.password === values.passwordVerify ? testsPassed.passwordVerify = true : testsPassed.passwordVerify = false;
+    handleFormComplete();
+  }
+
+  const handleHelperText = (prop, helperText)=> {
+    console.log(testsPassed)
+    return(testsPassed.hasOwnProperty(prop) ? 
+    testsPassed[prop] === true ? 
+    <Alert  severity="success"></Alert> 
+    : <Alert severity="error">{helperText}</Alert> 
+            :<></> )
+
+  }
+  
+  const handleFormComplete = ()=>{
+    document.getElementById("RegisterButton").disabled = false
+    testsPassed.username === true && testsPassed.password === true && testsPassed.passwordVerify === true && testsPassed.email === true ?
+    setButtonDisabled(false): setButtonDisabled(true)
+    console.log(testsPassed)
+    console.log(values)
+  }
+  
   const handleSubmit = (event) => {
     console.log("submit: ", values)
     console.log(event)
     event.preventDefault()
   }
 
-  const handlePasswordVerify = () => {
-    values.password === values.passwordVerify ? console.log("it matches!") : console.log("it doesn't match!");
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Username field */}
+    <form id="registerForm" onSubmit={handleSubmit}>
+{/* Username field */}
 {/* _______________________________________________________ */}
     <FormControl sx={{ m: 1, width: '30ch' }}>
     <InputLabel>Username</InputLabel>
-      <OutlinedInput id="usernameField" label="Username" helpertext="Please enter your username" onBlur={handleBlur} onChange={handleChange('username')}  />
-      </FormControl><br />
-       {/* Password field */}
+      <OutlinedInput id="usernameField" label="Username" helpertext="Please enter your username" onBlur={handleBlur('username')} onChange={handleChange('username')}  />
+      {handleHelperText("username", "username must be 1-30 characters long and contain only letters or spaces")}
+      </FormControl>
+       <br />
+{/* Email field*/}
+{/* _______________________________________________________ */}
+      <FormControl sx={{ m: 1, width: '30ch' }}>
+      <InputLabel>Email address</InputLabel>
+      <OutlinedInput id="emailField" label="Email address" helpertext="Please enter your email address" onBlur={handleBlur('email')} onChange={handleChange('email')}  />
+      {handleHelperText("email", "Email must be a valid email address; \"example@domain.tag\"")}
+      </FormControl>
+       <br />
+{/* Password field */}
 {/* _______________________________________________________ */}
       <FormControl sx={{ m: 1, width: '30ch' }}>
       <InputLabel>Password</InputLabel>
@@ -61,6 +94,7 @@ const NewUserForm = () => {
         value={values.password}
         label="password"
         onChange={handleChange('password')}
+        onBlur={handleBlur('password')}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -72,11 +106,14 @@ const NewUserForm = () => {
               {values.showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>
-        }/>
-        </FormControl><br />
-         {/* Password verification field */}
+        }/> 
+        {handleHelperText("password", "Password must be 6-30 characters long, must contain only letters, numbers and special characters(!@#$%^&*) and must contain at least one uppercase letter, one lowercase letter and one number")}
+    
+        </FormControl>
+        <br />
+{/* Password verification field */}
 {/* _______________________________________________________ */}
-        <FormControl sx={{ m: 1, width: '30ch' }}>
+      <FormControl sx={{ m: 1, width: '30ch' }}>
       <InputLabel>Re-enter Password</InputLabel>
       <OutlinedInput
         id="passwordVerifyField"
@@ -98,9 +135,15 @@ const NewUserForm = () => {
           </InputAdornment>
         }
         />
-        </FormControl><br />
-      <Button variant="text" type="Submit">
-        Submit 
+        {handleHelperText("passwordVerify", "Password fields must match!")}
+        </FormControl>
+        <br />
+{/* Tutor toggle */}
+{/* _______________________________________________________ */}
+        <FormControlLabel control={<Switch onChange={setTutor} />}  label="I am a tutor" /><br/><br />
+
+      <Button id="RegisterButton" variant="text" type="Submit" disabled={buttonDisabled}>
+        Register
       </Button>
       </form>
   );
