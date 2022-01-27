@@ -11,9 +11,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  avatarContainer: {
-    display: "flex",
-    alignItems: "center",
+  logo: {
+    marginLeft: "-100px",
+    marginTop: theme.spacing(0),
+    marginBottom: theme.spacing(0),
   },
   titleContainer: {
     display: "flex",

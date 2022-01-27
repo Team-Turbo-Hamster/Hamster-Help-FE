@@ -18,12 +18,7 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} className={classes.gridLogoItem}>
-          <img
-            className={classes.logo}
-            src={logo}
-            width={"60%"}
-            height={"auto"}
-          />
+          <img className={classes.logo} src={logo} width={"60%"} height={"auto"} alt="Logo" />
         </Grid>
         <Grid item xs={12} className={classes.gridItem}>
           {/* {user.role === "Student" ? <StudentHomeOpt /> : <TutorHomeOpt />} */}
