@@ -21,8 +21,6 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  console.log(user);
-
   const signIn = async (details) => {
     setLoading(true);
     try {

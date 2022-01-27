@@ -15,21 +15,23 @@ const Ticket = () => {
   //   61f11831cefdb7825ca660b1
 
   useEffect(() => {
-    getTicketById(ticket_id)
-      .then((data) => {
-        setTicket(data);
-        return getUserById(data.user);
-      })
-      .then((data2) => {
+    getTicketById(ticket_id).then((data) => {
+      setTicket(data);
+    });
+  }, [ticket_id]);
+
+  useEffect(() => {
+    if (ticket) {
+      getUserById(ticket.user).then((data2) => {
+        console.log(data2, "-----------------");
         setUser(data2);
       });
-  }, []);
-
-  console.log(user);
+    }
+  }, [ticket]);
 
   return (
     <Container maxWidth="md">
-      {ticket ? (
+      {ticket && user ? (
         <Grid container>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
