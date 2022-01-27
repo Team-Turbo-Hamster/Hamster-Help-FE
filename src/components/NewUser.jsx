@@ -1,8 +1,11 @@
+
 import { Button, FormControl, FormControlLabel, Switch, InputLabel, OutlinedInput, InputAdornment, IconButton, Alert } from "@mui/material";
+
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 
 const NewUserForm = () => {
+
   const [values, setValues] = useState({ username: "", password: "", passwordVerify: "", email: "", isATutor: false, showPassword: false });
   const tests = {username: /^[a-zA-Z\s-]{1,30}$/, password: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^[a-zA-Z0-9!@#$%^&*]{6,30}$/, email: /[+*?^$./\w]+@\w+\.\w+/}
   const [testsPassed, setTestsPassed] = useState({})
@@ -19,6 +22,7 @@ const NewUserForm = () => {
     test.test(values[prop]) ? setTestsPassed({...testsPassed, [prop]: true}) : setTestsPassed({...testsPassed,  [prop]: false});
     handlePasswordVerify();
     handleFormComplete();
+
   };
 
   const setTutor = (event) => {
@@ -61,10 +65,10 @@ const NewUserForm = () => {
   }
   
   const handleSubmit = (event) => {
-    console.log("submit: ", values)
-    console.log(event)
-    event.preventDefault()
-  }
+    console.log("submit: ", values);
+    console.log(event);
+    event.preventDefault();
+  };
 
   return (
     <form id="registerForm" onSubmit={handleSubmit}>
@@ -145,7 +149,7 @@ const NewUserForm = () => {
       <Button id="RegisterButton" variant="text" type="Submit" disabled={buttonDisabled}>
         Register
       </Button>
-      </form>
+    </form>
   );
 };
 

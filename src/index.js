@@ -7,17 +7,18 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import { ColorModeContextProvider } from "./styles/theme";
 import { CssBaseline } from "@mui/material";
+import { AuthProvider } from "./contexts/useAuth";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ColorModeContextProvider>
-    {/* <AuthProvider> */}
-        <CssBaseline />
-        <App />
-        {/* </AuthProvider> */}
-      </ColorModeContextProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ColorModeContextProvider>
+          <CssBaseline />
+          <App />
+        </ColorModeContextProvider>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

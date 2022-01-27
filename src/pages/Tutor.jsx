@@ -1,4 +1,6 @@
 import { Grid } from "@mui/material";
+import TutorQueue from "../components/TutorQueue";
+import Chatbox from "../components/Chat";
 
 const Tutor = (props) => {
   return (
@@ -10,7 +12,10 @@ const Tutor = (props) => {
         Current Card
       </Grid>
       <Grid item xl={2} xs={12}>
-        Some Cards
+        <TutorQueue />
+      </Grid>
+      <Grid item xl={2} xs={12}>
+        <Chatbox />
       </Grid>
     </Grid>
   );
