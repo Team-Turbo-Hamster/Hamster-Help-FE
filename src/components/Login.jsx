@@ -1,4 +1,11 @@
-import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import useAuth from "../contexts/useAuth";
@@ -42,7 +49,7 @@ const Login = () => {
           id="usernameField"
           label="Username"
           value={values.username}
-          helperext="Please enter your username"
+          helpertext="Please enter your username"
           onChange={handleChange("username")}
         />
       </FormControl>
