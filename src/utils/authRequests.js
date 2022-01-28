@@ -25,3 +25,13 @@ export const loadUser = async (token) => {
     console.log(error);
   }
 };
+
+export const registerUser = async (userForm) => {
+  try {
+    const user = await axios.post(`/api/users`, userForm);
+
+    return user.data.user;
+  } catch (error) {
+    console.log(error);
+  }
+};

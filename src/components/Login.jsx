@@ -9,15 +9,16 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import useAuth from "../contexts/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
-    username: "quatre@email.com",
-    password: "123456677",
+    username: "quatre29@email.com",
+    password: "Qweqweqwe2",
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const { signIn } = useAuth();
+  const { signIn, user } = useAuth();
 
   const handleChange = (prop) => (event) => {
     event.preventDefault();
