@@ -11,14 +11,14 @@ import { AuthProvider } from "./contexts/useAuth";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <ColorModeContextProvider>
+    <ColorModeContextProvider>
+      <AuthProvider>
+        <BrowserRouter>
           <CssBaseline />
           <App />
-        </ColorModeContextProvider>
-      </BrowserRouter>
-    </AuthProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    </ColorModeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
