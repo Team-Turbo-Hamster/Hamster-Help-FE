@@ -10,6 +10,7 @@ import CreateTicket from "./pages/CreateTicket";
 import Queue from "./pages/Queue";
 import Ticket from "./pages/Ticket";
 import PrivateRoute from "./components/PrivateRoute";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   const { user } = useAuth();
@@ -52,7 +53,7 @@ function App() {
         />
         <Route
           path="/tutor"
-          component={
+          element={
             <PrivateRoute>
               <Tutor />
             </PrivateRoute>
@@ -61,9 +62,27 @@ function App() {
 
         <Route
           path="/cloudinary-test"
-          component={
+          element={
             <PrivateRoute>
               <CloudinaryTest />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/users/:user_id"
+          element={
+            <PrivateRoute>
+              <UserProfile />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-profile"
+          element={
+            <PrivateRoute>
+              <UserProfile />
             </PrivateRoute>
           }
         />

@@ -9,11 +9,15 @@ import {
 } from "@mui/material";
 import ThemeToggle from "./ThemeToggle";
 import useAuth from "../contexts/useAuth";
+import { useNavigate, Link } from "react-router-dom";
+import useStyles from "../styles/components/settings-menu.styles";
 
 const SettingsMenu = ({ handleCloseNavMenu }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+  const navigate = useNavigate();
+  const classes = useStyles();
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -21,6 +25,11 @@ const SettingsMenu = ({ handleCloseNavMenu }) => {
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenuGoProfile = () => {
+    setAnchorElUser(null);
+    navigate("/my-profile");
   };
 
   return (
@@ -47,7 +56,19 @@ const SettingsMenu = ({ handleCloseNavMenu }) => {
         onClose={handleCloseUserMenu}
       >
         <ThemeToggle />
-        <MenuItem onClick={() => signOut()} variant="contained">
+
+        <MenuItem
+          variant="contained"
+          className={classes.menuItem}
+          onClick={handleCloseUserMenuGoProfile}
+        >
+          My Profile
+        </MenuItem>
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => signOut()}
+          variant="contained"
+        >
           Sign Out
         </MenuItem>
       </Menu>

@@ -9,6 +9,7 @@ import useAuth from "../contexts/useAuth";
 const Home = () => {
   const classes = useStyles();
   const { user } = useAuth();
+
   return (
     <Container maxWidth="lg">
       <Grid container className={classes.container}>
