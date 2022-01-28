@@ -22,3 +22,12 @@ export const createTicket = async (ticketForm) => {
     console.log(error);
   }
 };
+
+export const getAllTickets = async () => {
+  try {
+    const tickets = await axios.get(`/api/tickets`);
+    return tickets.data.tickets;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -40,7 +40,14 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <Avatar src={user.avatar} />
+                  <Avatar>
+                    <Image
+                      width="100%"
+                      cloudName="turbo-hamster"
+                      publicId={user.avatar}
+                    />
+                  </Avatar>
+
                   <Typography variant="body2">{user.name}</Typography>
                 </Box>
               </Grid>
