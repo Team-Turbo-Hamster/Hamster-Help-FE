@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { authenticate, loadUser } from "../utils/authRequests";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -20,8 +21,6 @@ export const AuthProvider = ({ children }) => {
       setLoadingInitial(false);
     }
   }, []);
-
-  console.log(user);
 
   const signIn = async (details) => {
     setLoading(true);
