@@ -1,9 +1,19 @@
 import { useState } from "react";
-import { Avatar, Box, Tooltip, Menu, IconButton } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Tooltip,
+  Menu,
+  IconButton,
+  MenuItem,
+} from "@mui/material";
 import ThemeToggle from "./ThemeToggle";
+import useAuth from "../contexts/useAuth";
 
 const SettingsMenu = ({ handleCloseNavMenu }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const { signOut } = useAuth();
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -37,6 +47,9 @@ const SettingsMenu = ({ handleCloseNavMenu }) => {
         onClose={handleCloseUserMenu}
       >
         <ThemeToggle />
+        <MenuItem onClick={() => signOut()} variant="contained">
+          Sign Out
+        </MenuItem>
       </Menu>
     </Box>
   );
