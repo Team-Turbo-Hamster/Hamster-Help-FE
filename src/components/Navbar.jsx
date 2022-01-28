@@ -5,7 +5,7 @@ import { AppBar, Toolbar, Container } from "@mui/material";
 import SettingsMenu from "./SettingsMenu";
 import NavMenu from "./NavMenu";
 
-const Layout = (props) => {
+const Navbar = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleCloseNavMenu = () => {
@@ -31,4 +31,4 @@ const Layout = (props) => {
   );
 };
 
-export default Layout;
+export default Navbar;

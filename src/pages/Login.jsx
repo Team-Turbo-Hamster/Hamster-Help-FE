@@ -3,10 +3,20 @@ import { Button, Box, Container, Grid, Typography } from "@mui/material";
 import logo from "../assets/hamsterlogo.png";
 import useStyles from "../styles/pages/login.styles";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../contexts/useAuth";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const classes = useStyles();
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
   return (
     <Container maxWidth="md">
       <Grid container>
