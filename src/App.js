@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import useAuth from "./contexts/useAuth";
-import Layout from "./components/Layout";
+import Navbar from "./components/Navbar";
 import Tutor from "./pages/Tutor";
 import CloudinaryTest from "./pages/CloudinaryTest";
 import LoginPage from "./pages/Login";
@@ -9,36 +9,67 @@ import HomePage from "./pages/Home";
 import CreateTicket from "./pages/CreateTicket";
 import Queue from "./pages/Queue";
 import Ticket from "./pages/Ticket";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
-  const navigate = useNavigate();
   const { user } = useAuth();
-  useEffect(() => {
-    if (!user) navigate("/login");
-  }, []);
 
   return (
     <div>
-      {user ? (
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/new-ticket" element={<CreateTicket />} />
-            <Route path="/queue" element={<Queue />} />
-            <Route path="/tickets/:ticket_id" element={<Ticket />} />
+      {user && <Navbar />}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/new-ticket"
+          element={
+            <PrivateRoute>
+              <CreateTicket />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/queue"
+          element={
+            <PrivateRoute>
+              <Queue />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tickets/:ticket_id"
+          element={
+            <PrivateRoute>
+              <Ticket />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tutor"
+          component={
+            <PrivateRoute>
+              <Tutor />
+            </PrivateRoute>
+          }
+        />
 
-            <Route path="/tutor" element={<Tutor />} />
-            <Route path="/cloudinary-test" element={<CloudinaryTest />} />
-          </Route>
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      )}
+        <Route
+          path="/cloudinary-test"
+          component={
+            <PrivateRoute>
+              <CloudinaryTest />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   );
 }
