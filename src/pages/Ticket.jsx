@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Container, Typography, Avatar, Paper, Box } from "@mui/material";
+import {
+  Grid,
+  Container,
+  Typography,
+  Avatar,
+  Paper,
+  Box,
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
 import useStyles from "../styles/pages/ticket.styles";
 import { getTicketById } from "../utils/ticketRequests";
 import { useParams } from "react-router-dom";
 import * as moment from "moment";
 import { getUserById } from "../utils/userRequests";
 import { Image } from "cloudinary-react";
+import Tag from "../components/Tag";
+import ImageGallery from "../components/ImageGallery";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -31,7 +42,7 @@ const Ticket = () => {
   return (
     <Container maxWidth="md">
       {ticket && user ? (
-        <Grid container>
+        <Grid container className={classes.ticketContainer}>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
               <Grid xs={12} item className={classes.titleContainer}>
@@ -47,16 +58,26 @@ const Ticket = () => {
                     />
                   </Avatar>
 
-                  <Typography variant="body2">{user.name}</Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ marginLeft: "10px", fontWeight: "bold" }}
+                  >
+                    {user.name}
+                  </Typography>
                 </Box>
               </Grid>
-              <Grid xs={12} item>
+              <Grid xs={12} item className={classes.dateContainer}>
                 <Typography variant="body2">
                   {moment(
                     ticket.created_at.toString(),
                     "YYYYMMDD HH:mm:ss"
                   ).fromNow()}
                 </Typography>
+              </Grid>
+              <Grid item className={classes.tagsContainer}>
+                {ticket.tags.map((tag, i) => (
+                  <Tag key={`${tag}${i}`} tag={tag}></Tag>
+                ))}
               </Grid>
             </Grid>
           </Grid>
@@ -66,10 +87,12 @@ const Ticket = () => {
                 Zoom button
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
-                <Typography variant="body1">{ticket.body}</Typography>
+                <Paper variant="outlined" className={classes.bodyPaper}>
+                  <Typography variant="body1">{ticket.body}</Typography>
+                </Paper>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
-                {ticket.images.map((image) => (
+                {/* {ticket.images.map((image) => (
                   <Image
                     key={image}
                     width="100"
@@ -77,7 +100,25 @@ const Ticket = () => {
                     crop="scale"
                     publicId={image}
                   />
-                ))}
+                ))} */}
+                {/* <ImageList
+                  sx={{ width: "100%", height: "auto", padding: "20px" }}
+                  cols={2}
+                  rowHeight={164}
+                >
+                  {ticket.images.map((image) => (
+                    <ImageListItem key={image}>
+                      <Image
+                        key={image}
+                        width="200"
+                        cloudName="turbo-hamster"
+                        crop="scale"
+                        publicId={image}
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList> */}
+                <ImageGallery images={ticket.images} />
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
                 <Grid container>

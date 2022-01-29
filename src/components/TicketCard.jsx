@@ -58,7 +58,9 @@ const TicketCard = ({ ticket }) => {
                   </span>
                 </Grid>
                 <Grid item xs={12} className={classes.titleContainer}>
-                  <Typography variant="h5">{ticket.title}</Typography>
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                    {ticket.title}
+                  </Typography>
                 </Grid>
 
                 <Grid item xs={12} className={classes.tagsContainer}>

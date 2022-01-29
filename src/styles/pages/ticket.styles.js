@@ -1,6 +1,9 @@
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
+  ticketContainer: {
+    marginTop: theme.spacing(4),
+  },
   gridItem: {
     display: "flex",
     alignItems: "center",
@@ -10,10 +13,23 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: theme.spacing(4),
+  },
+  bodyPaper: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(4, 0, 4, 0),
   },
   avatarContainer: {
     display: "flex",
     alignItems: "center",
+  },
+  dateContainer: {
+    paddingTop: theme.spacing(2),
+  },
+  tagsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: theme.spacing(2),
   },
   titleContainer: {
     display: "flex",
