@@ -28,7 +28,6 @@ const Ticket = () => {
       });
     }
   }, [ticket]);
-  console.log(ticket);
   return (
     <Container maxWidth="md">
       {ticket && user ? (

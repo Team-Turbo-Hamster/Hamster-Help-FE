@@ -7,7 +7,11 @@ import {
   Card,
   CardMedia,
   CardActionArea,
+  Badge,
 } from "@mui/material";
+import { ChatBubble } from "@mui/icons-material";
+
+import Tag from "./Tag";
 import useStyles from "../styles/components/ticket-card.styles";
 import { getUserById } from "../utils/userRequests";
 import { Image } from "cloudinary-react";
@@ -38,12 +42,12 @@ const TicketCard = ({ ticket }) => {
                 />
               </Avatar>
             </Grid>
-            <Grid item xs={10}>
-              <Grid container>
-                <Grid item>{userTicket.name}</Grid>
-                <Grid item>{ticket.title}</Grid>
-
-                <Grid item>
+            <Grid item xs={10} sm={11}>
+              <Grid container className={classes.ticketContent}>
+                <Grid item xs={12}>
+                  <Typography variant="body1">{userTicket.name}</Typography>
+                </Grid>
+                <Grid item className={classes.dateContainer}>
                   <span>
                     {ticket.created_at !== null
                       ? moment(
@@ -53,12 +57,24 @@ const TicketCard = ({ ticket }) => {
                       : "just now..."}
                   </span>
                 </Grid>
-                <Grid item>
-                  {ticket.tags.map((tag, i) => (
-                    <div key={`${tag}${i}`}>tag</div>
-                  ))}
+                <Grid item xs={12} className={classes.titleContainer}>
+                  <Typography variant="h5">{ticket.title}</Typography>
                 </Grid>
-                <Grid item>icons</Grid>
+
+                <Grid item xs={12} className={classes.tagsContainer}>
+                  {/* <Box className={classes.tagsContainer}> */}
+                  {ticket.tags.map((tag, i) => (
+                    <Tag key={`${tag}${i}`} tag={tag} />
+                  ))}
+                  {/* </Box> */}
+                </Grid>
+                <Grid item xs={12}>
+                  <Box className={classes.commentsContainer}>
+                    <Badge color="secondary" badgeContent={4}>
+                      <ChatBubble />
+                    </Badge>
+                  </Box>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

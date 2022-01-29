@@ -14,11 +14,11 @@ const Queue = () => {
 
   return (
     <Container maxWidth="md">
-      <Grid container>
-        <Grid item>
+      <Grid container className={classes.container}>
+        <Grid xs={12} item>
           <Typography variant="h5">Queue</Typography>
         </Grid>
-        <Grid item>
+        <Grid xs={12} item>
           {tickets.map((ticket, i) => (
             <TicketCard key={`${ticket.title}${i}`} ticket={ticket} />
           ))}
