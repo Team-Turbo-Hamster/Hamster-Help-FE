@@ -11,6 +11,7 @@ import ThemeToggle from "./ThemeToggle";
 import useAuth from "../contexts/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import useStyles from "../styles/components/settings-menu.styles";
+import { Image } from "cloudinary-react";
 
 const SettingsMenu = ({ handleCloseNavMenu }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -36,7 +37,13 @@ const SettingsMenu = ({ handleCloseNavMenu }) => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar>
+            <Image
+              width="100%"
+              cloudName="turbo-hamster"
+              publicId={user.avatar}
+            />
+          </Avatar>
         </IconButton>
       </Tooltip>
       <Menu
