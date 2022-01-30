@@ -31,3 +31,12 @@ export const getAllTickets = async () => {
     console.log(error);
   }
 };
+
+export const getTicketsByUserId = async (user_id) => {
+  try {
+    const tickets = await axios.get(`/api/users/${user_id}/tickets`);
+    return tickets.data.tickets;
+  } catch (error) {
+    console.log(error);
+  }
+};

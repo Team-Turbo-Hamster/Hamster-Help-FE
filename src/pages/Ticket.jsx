@@ -17,6 +17,7 @@ import { getUserById } from "../utils/userRequests";
 import { Image } from "cloudinary-react";
 import Tag from "../components/Tag";
 import ImageGallery from "../components/ImageGallery";
+import UserAvatar from "../components/UserAvatar";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -50,14 +51,7 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <Avatar>
-                    <Image
-                      width="100%"
-                      cloudName="turbo-hamster"
-                      publicId={user.avatar}
-                    />
-                  </Avatar>
-
+                  <UserAvatar publicId={user.avatar} online={true} />
                   <Typography
                     variant="body2"
                     sx={{ marginLeft: "10px", fontWeight: "bold" }}
@@ -92,32 +86,6 @@ const Ticket = () => {
                 </Paper>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
-                {/* {ticket.images.map((image) => (
-                  <Image
-                    key={image}
-                    width="100"
-                    cloudName="turbo-hamster"
-                    crop="scale"
-                    publicId={image}
-                  />
-                ))} */}
-                {/* <ImageList
-                  sx={{ width: "100%", height: "auto", padding: "20px" }}
-                  cols={2}
-                  rowHeight={164}
-                >
-                  {ticket.images.map((image) => (
-                    <ImageListItem key={image}>
-                      <Image
-                        key={image}
-                        width="200"
-                        cloudName="turbo-hamster"
-                        crop="scale"
-                        publicId={image}
-                      />
-                    </ImageListItem>
-                  ))}
-                </ImageList> */}
                 <ImageGallery images={ticket.images} />
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>

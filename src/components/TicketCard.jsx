@@ -30,7 +30,7 @@ const TicketCard = ({ ticket }) => {
   }, [ticket]);
 
   return (
-    <Card className={classes.cardContainer}>
+    <Card className={classes.cardContainer} elevation={3}>
       {userTicket ? (
         <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
           <Grid container className={classes.ticketContainer}>
