@@ -32,7 +32,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const UserAvatar = ({ className, publicId, availableAvatar, online }) => {
+const UserAvatar = ({ className, publicId, online }) => {
   return (
     <>
       {online ? (
@@ -42,20 +42,18 @@ const UserAvatar = ({ className, publicId, availableAvatar, online }) => {
           variant="dot"
         >
           <Avatar alt="user avatar" className={className}>
-            {availableAvatar ? (
+            {
               <Image
                 cloudName="turbo-hamster"
                 publicId={publicId}
                 width="100%"
               />
-            ) : null}
+            }
           </Avatar>
         </StyledBadge>
       ) : (
         <Avatar alt="user avatar" className={className}>
-          {availableAvatar ? (
-            <Image cloudName="turbo-hamster" publicId={publicId} width="100%" />
-          ) : null}
+          {<Image cloudName="turbo-hamster" publicId={publicId} width="100%" />}
         </Avatar>
       )}
     </>

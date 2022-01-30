@@ -17,6 +17,7 @@ import { getUserById } from "../utils/userRequests";
 import { Image } from "cloudinary-react";
 import * as moment from "moment";
 import { useNavigate } from "react-router-dom";
+import UserAvatar from "./UserAvatar";
 
 const TicketCard = ({ ticket }) => {
   const [userTicket, setUserTicket] = useState(null);
@@ -34,13 +35,7 @@ const TicketCard = ({ ticket }) => {
         <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
           <Grid container className={classes.ticketContainer}>
             <Grid item>
-              <Avatar>
-                <Image
-                  width="100%"
-                  cloudName="turbo-hamster"
-                  publicId={userTicket.avatar}
-                />
-              </Avatar>
+              <UserAvatar publicId={userTicket.avatar} online={true} />
             </Grid>
             <Grid item xs={10} sm={11}>
               <Grid container className={classes.ticketContent}>
