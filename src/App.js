@@ -11,6 +11,7 @@ import Queue from "./pages/Queue";
 import Ticket from "./pages/Ticket";
 import PrivateRoute from "./components/PrivateRoute";
 import UserProfile from "./pages/UserProfile";
+import TagPage from "./pages/TagPage";
 
 function App() {
   const { user } = useAuth();
@@ -83,6 +84,15 @@ function App() {
           element={
             <PrivateRoute>
               <UserProfile />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="tickets/tag/:tag_name"
+          element={
+            <PrivateRoute>
+              <TagPage />
             </PrivateRoute>
           }
         />

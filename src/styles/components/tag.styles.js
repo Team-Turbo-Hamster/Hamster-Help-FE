@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
     // maxWidth: theme.spacing(4),
     marginRight: theme.spacing(1),
   },
+  link: {
+    textDecoration: "none",
+  },
 }));
 
 export default useStyles;

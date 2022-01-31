@@ -40,3 +40,32 @@ export const getTicketsByUserId = async (user_id) => {
     console.log(error);
   }
 };
+
+export const getTicketsByTag = async (tag_name) => {
+  try {
+    const tickets = await axios.get(`/api/tickets/tag/${tag_name}`);
+    return tickets.data.tickets;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const resolveTicket = async (ticket_id) => {
+  try {
+    const ticket = await axios.patch(`/api/tickets/${ticket_id}/resolve`);
+
+    return ticket.data.ticket;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const unResolveTicket = async (ticket_id) => {
+  try {
+    const ticket = await axios.patch(`/api/tickets/${ticket_id}/unresolve`);
+
+    return ticket.data.ticket;
+  } catch (error) {
+    console.log(error);
+  }
+};
