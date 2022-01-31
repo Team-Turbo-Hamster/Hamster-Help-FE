@@ -6,25 +6,35 @@ import {
   Avatar,
   Paper,
   Box,
-  ImageList,
-  ImageListItem,
+  Button,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import useStyles from "../styles/pages/ticket.styles";
-import { getTicketById } from "../utils/ticketRequests";
+import {
+  getTicketById,
+  resolveTicket,
+  unResolveTicket,
+} from "../utils/ticketRequests";
 import { useParams } from "react-router-dom";
 import * as moment from "moment";
 import { getUserById } from "../utils/userRequests";
-import { Image } from "cloudinary-react";
 import Tag from "../components/Tag";
 import ImageGallery from "../components/ImageGallery";
 import UserAvatar from "../components/UserAvatar";
+import useAuth from "../contexts/useAuth";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
-  const [user, setUser] = useState(null);
+  const [ticketUser, setTicketUser] = useState(null);
 
+  const { user } = useAuth();
   const classes = useStyles();
   const { ticket_id } = useParams();
+
+  const resolveButton =
+    ticket && !(user.role === "Tutor" && ticket.resolved === false);
+  const unResolveButton =
+    ticket && !(user.role === "Tutor" && ticket.resolved === true);
 
   useEffect(() => {
     getTicketById(ticket_id).then((data) => {
@@ -35,13 +45,21 @@ const Ticket = () => {
   useEffect(() => {
     if (ticket) {
       getUserById(ticket.user).then((data2) => {
-        setUser(data2);
+        setTicketUser(data2);
       });
     }
   }, [ticket]);
+
+  const submitResolveTicket = () => {
+    resolveTicket(ticket._id).then((data) => setTicket(data));
+  };
+  const submitUnResolveTicket = () => {
+    unResolveTicket(ticket._id).then((data) => setTicket(data));
+  };
+
   return (
     <Container maxWidth="md">
-      {ticket && user ? (
+      {ticket && ticketUser ? (
         <Grid container className={classes.ticketContainer}>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
@@ -50,13 +68,18 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <UserAvatar publicId={user.avatar} online={true} />
-                  <Typography
-                    variant="body2"
-                    sx={{ marginLeft: "10px", fontWeight: "bold" }}
+                  <UserAvatar publicId={ticketUser.avatar} online={true} />
+                  <Link
+                    to={`/users/${ticket.user}`}
+                    className={classes.userNameLink}
                   >
-                    {user.name}
-                  </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      {ticketUser.name}
+                    </Typography>
+                  </Link>
                 </Box>
               </Grid>
               <Grid xs={12} item className={classes.dateContainer}>
@@ -78,6 +101,26 @@ const Ticket = () => {
             <Grid container className={classes.bodyContainer}>
               <Grid xs={12} item className={classes.gridItem}>
                 Zoom button
+              </Grid>
+              <Grid xs={6} item className={classes.gridItem}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  disabled={resolveButton}
+                  onClick={submitResolveTicket}
+                >
+                  Resolve ticket
+                </Button>
+              </Grid>
+              <Grid xs={6} item className={classes.gridItem}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  disabled={unResolveButton}
+                  onClick={submitUnResolveTicket}
+                >
+                  Unresolve
+                </Button>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
                 <Paper variant="outlined" className={classes.bodyPaper}>

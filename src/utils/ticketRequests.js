@@ -52,7 +52,15 @@ export const getTicketsByTag = async (tag_name) => {
 
 export const resolveTicket = async (ticket_id) => {
   try {
-    const ticket = await axios.patch(`/api/tickets/${ticket_id}/resolve`);
+    const ticket = await axios.patch(
+      `/api/tickets/${ticket_id}/resolve`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("user-token"),
+        },
+      }
+    );
 
     return ticket.data.ticket;
   } catch (error) {
@@ -62,7 +70,15 @@ export const resolveTicket = async (ticket_id) => {
 
 export const unResolveTicket = async (ticket_id) => {
   try {
-    const ticket = await axios.patch(`/api/tickets/${ticket_id}/unresolve`);
+    const ticket = await axios.patch(
+      `/api/tickets/${ticket_id}/unresolve`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("user-token"),
+        },
+      }
+    );
 
     return ticket.data.ticket;
   } catch (error) {
