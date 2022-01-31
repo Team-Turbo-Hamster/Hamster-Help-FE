@@ -4,6 +4,8 @@ import useStyles from "../styles/pages/tag-page.styles";
 import { Grid, Container, Typography, Paper } from "@mui/material";
 import { getTicketsByTag } from "../utils/ticketRequests";
 import TicketCard from "../components/TicketCard";
+import TicketsList from "../components/TicketsList";
+import TicketsTabs from "../components/TicketsTabs";
 
 const TagPage = () => {
   const [tickets, setTickets] = useState([]);
@@ -21,6 +23,7 @@ const TagPage = () => {
 
     return () => (cancel = false);
   }, [tag_name]);
+
   return (
     <Container maxWidth="md">
       <Grid container>
@@ -30,9 +33,7 @@ const TagPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          {tickets.map((ticket) => (
-            <TicketCard key={ticket._id} ticket={ticket} />
-          ))}
+          <TicketsTabs tickets={tickets} />
         </Grid>
       </Grid>
     </Container>

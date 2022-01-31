@@ -25,7 +25,6 @@ const Ticket = () => {
 
   const classes = useStyles();
   const { ticket_id } = useParams();
-  //   61f11831cefdb7825ca660b1
 
   useEffect(() => {
     getTicketById(ticket_id).then((data) => {

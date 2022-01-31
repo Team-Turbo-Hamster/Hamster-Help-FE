@@ -8,6 +8,8 @@ import UserRoleBadge from "../components/UserRoleBadge";
 import useAuth from "../contexts/useAuth";
 import { getTicketsByUserId } from "../utils/ticketRequests";
 import TicketCard from "../components/TicketCard";
+import TicketsList from "../components/TicketsList";
+import TicketsTabs from "../components/TicketsTabs";
 
 const UserProfile = () => {
   const [visitedUser, setVisitedUser] = useState(null);
@@ -65,10 +67,7 @@ const UserProfile = () => {
           </Paper>
 
           <Box className={classes.myTicketsContainer}>
-            <Typography variant="h5">My tickets</Typography>
-            {userTickets.map((ticket) => (
-              <TicketCard key={ticket._id} ticket={ticket} />
-            ))}
+            <TicketsTabs tickets={userTickets} />
           </Box>
         </>
       ) : (
