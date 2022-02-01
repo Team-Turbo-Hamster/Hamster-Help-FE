@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Grid, Typography, Card } from "@mui/material";
 import useStyles from "../styles/pages/queue.styles";
 import TicketCard from "../components/TicketCard";
-import { getAllTickets } from "../utils/ticketRequests";
+import { getAllTickets, getUnresolvedTickets } from "../utils/ticketRequests";
 import TicketsList from "../components/TicketsList";
 
 const Queue = () => {
@@ -10,7 +10,7 @@ const Queue = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    getAllTickets().then((data) => setTickets(data));
+    getUnresolvedTickets().then((data) => setTickets(data));
   }, []);
 
   return (

@@ -32,6 +32,24 @@ export const getAllTickets = async () => {
   }
 };
 
+export const getUnresolvedTickets = async () => {
+  try {
+    const tickets = await axios.get(`/api/tickets/unresolved`);
+    return tickets.data.tickets;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getResolvedTickets = async () => {
+  try {
+    const tickets = await axios.get(`/api/tickets/resolved`);
+    return tickets.data.tickets;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getTicketsByUserId = async (user_id) => {
   try {
     const tickets = await axios.get(`/api/users/${user_id}/tickets`);
