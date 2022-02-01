@@ -1,11 +1,4 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import { Button, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import useAuth from "../contexts/useAuth";
@@ -78,7 +71,7 @@ const Login = () => {
         />
       </FormControl>
       <br />
-      <Button variant="text" type="Submit">
+      <Button variant="contained" type="Submit">
         Submit
       </Button>
     </form>

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { grey, cyan } from "@mui/material/colors";
+import { grey, blueGrey } from "@mui/material/colors";
+import { SentimentVerySatisfied } from "@mui/icons-material";
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
@@ -23,6 +24,14 @@ export const ColorModeContextProvider = ({ children }) => {
   const theme = useMemo(
     () =>
       createTheme({
+        typography: {
+          fontFamily: "Lato",
+          fontSize: "14",
+          fontWeightLight: 300,
+          fontWeightMedium: 400,
+          fontWeightRegular: 500,
+          fontWeightBold: 900,
+        },
         palette: {
           mode,
           primary: {
@@ -31,9 +40,9 @@ export const ColorModeContextProvider = ({ children }) => {
             dark: mode === "light" ? "#2b6777" : grey[600],
           },
           secondary: {
-            main: cyan[400],
-            light: "#fffff",
-            dark: grey[300],
+            main: blueGrey[500],
+            light: blueGrey[50],
+            dark: blueGrey[700],
           },
         },
       }),
