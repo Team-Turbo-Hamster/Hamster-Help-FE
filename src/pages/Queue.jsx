@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Container, Grid, Typography, Card } from "@mui/material";
 import useStyles from "../styles/pages/queue.styles";
 import TicketCard from "../components/TicketCard";
-import { getAllTickets } from "../utils/ticketRequests";
+import { getAllTickets, getUnresolvedTickets } from "../utils/ticketRequests";
+import TicketsList from "../components/TicketsList";
 
 const Queue = () => {
   const [tickets, setTickets] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    getAllTickets().then((data) => setTickets(data));
+    getUnresolvedTickets().then((data) => setTickets(data));
   }, []);
 
   return (
@@ -19,9 +20,7 @@ const Queue = () => {
           <Typography variant="h5">Queue</Typography>
         </Grid>
         <Grid xs={12} item>
-          {tickets.map((ticket, i) => (
-            <TicketCard key={`${ticket.title}${i}`} ticket={ticket} />
-          ))}
+          <TicketsList tickets={tickets} />
         </Grid>
       </Grid>
     </Container>
