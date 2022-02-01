@@ -25,7 +25,7 @@ export const ColorModeContextProvider = ({ children }) => {
       createTheme({
         typography: {
           fontFamily: "Lato",
-          fontSize: "14",
+          fontSize: 14,
           fontWeightLight: 300,
           fontWeightMedium: 400,
           fontWeightRegular: 500,
