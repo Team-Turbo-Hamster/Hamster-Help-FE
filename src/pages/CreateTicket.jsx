@@ -39,9 +39,6 @@ const CreateTicket = () => {
       { key: 4, label: 'Vuejs' },
     ]);
 
-  // const [givenTags, setGivenTags] = useState(tagList.map((tag, element) => {return {value:tag, key:element, count:Math.floor((Math.random()*10) +20), color: "blue"}}))
-  
-
   
   const { user } = useAuth();
   
@@ -51,7 +48,8 @@ const CreateTicket = () => {
 
   
   const handleTagClick = (data) => {
-   tagsInput.match(`\b${data}\b`) ? <></> : setTagsInput(tagsInput.concat(" ", data))
+
+   tagsInput.includes(data) ? <></> : setTagsInput(tagsInput.concat(" ", data))
   }
 
   const previewFile = (file) => {

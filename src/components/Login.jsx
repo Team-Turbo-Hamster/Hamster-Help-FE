@@ -20,7 +20,9 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [testsPassed, setTestsPassed] = useState({username:true, password:true});
-  const helperText = {username:"Username must be 1-30 character long and contain only letter or spaces", password:"Password must be 6-30 characters long, must contain only letters, numbers and special characters(!@#$%^&*) and must contain at least one uppercase letter, one lowercase letter and one number"}
+  const helperText = {
+    username:"Username must be 1-30 character long and contain only letter or spaces", 
+    password:"Password must be 6-30 characters long, must contain only letters, numbers and special characters(!@#$%^&*) and must contain at least one uppercase letter, one lowercase letter and one number"}
   const tests =  {username: /^[a-zA-Z\s-]{4,15}$/, password: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^[a-zA-Z0-9!@#$%^&*]{6,30}$/,};
 
   const { signIn, user } = useAuth();
