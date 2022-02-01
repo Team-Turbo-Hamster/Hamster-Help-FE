@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
+    height: "100vh",
   },
 
   titleContainer: {
@@ -27,8 +27,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   bodyLeft: {
+    [theme.breakpoints.down("md")]: {
+      minHeight: "50vh",
+    },
     maxWidth: "100%",
-    maxHeight: "auto",
+    minHeight: "100vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -36,11 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 
   bodyRight: {
+    [theme.breakpoints.down("md")]: {
+      minHeight: "50vh",
+      background: theme.palette.secondary.main,
+    },
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: "50%",
     },
-    maxHeight: "100%",
+    minHeight: "100vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -55,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.secondary.light,
   },
 
-  button: {
-    // margin: "450px",
+  logo: {
+    paddingRight: theme.spacing(8),
   },
 }));
 

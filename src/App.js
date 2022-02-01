@@ -11,12 +11,14 @@ import Queue from "./pages/Queue";
 import Ticket from "./pages/Ticket";
 import PrivateRoute from "./components/PrivateRoute";
 import UserProfile from "./pages/UserProfile";
+import useStyles from "./styles/pages/app.styles";
 
 function App() {
   const { user } = useAuth();
+  const classes = useStyles();
 
   return (
-    <div>
+    <div className={classes.appContainer}>
       {user && <Navbar />}
       <Routes>
         <Route

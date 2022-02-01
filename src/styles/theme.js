@@ -1,7 +1,6 @@
 import React, { createContext, useState, useMemo, useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { grey, blueGrey } from "@mui/material/colors";
-import { SentimentVerySatisfied } from "@mui/icons-material";
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
