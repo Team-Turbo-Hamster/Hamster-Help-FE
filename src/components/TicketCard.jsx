@@ -7,12 +7,17 @@ import {
   Card,
   CardMedia,
   CardActionArea,
+  Badge,
 } from "@mui/material";
+import { ChatBubble } from "@mui/icons-material";
+
+import Tag from "./Tag";
 import useStyles from "../styles/components/ticket-card.styles";
 import { getUserById } from "../utils/userRequests";
 import { Image } from "cloudinary-react";
 import * as moment from "moment";
 import { useNavigate } from "react-router-dom";
+import UserAvatar from "./UserAvatar";
 
 const TicketCard = ({ ticket }) => {
   const [userTicket, setUserTicket] = useState(null);
@@ -25,25 +30,19 @@ const TicketCard = ({ ticket }) => {
   }, [ticket]);
 
   return (
-    <Card className={classes.cardContainer}>
+    <Card className={classes.cardContainer} elevation={3}>
       {userTicket ? (
         <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
           <Grid container className={classes.ticketContainer}>
             <Grid item>
-              <Avatar>
-                <Image
-                  width="100%"
-                  cloudName="turbo-hamster"
-                  publicId={userTicket.avatar}
-                />
-              </Avatar>
+              <UserAvatar publicId={userTicket.avatar} online={true} />
             </Grid>
-            <Grid item xs={10}>
-              <Grid container>
-                <Grid item>{userTicket.name}</Grid>
-                <Grid item>{ticket.title}</Grid>
-
-                <Grid item>
+            <Grid item xs={10} sm={11}>
+              <Grid container className={classes.ticketContent}>
+                <Grid item xs={12}>
+                  <Typography variant="body1">{userTicket.name}</Typography>
+                </Grid>
+                <Grid item className={classes.dateContainer}>
                   <span>
                     {ticket.created_at !== null
                       ? moment(
@@ -53,12 +52,26 @@ const TicketCard = ({ ticket }) => {
                       : "just now..."}
                   </span>
                 </Grid>
-                <Grid item>
-                  {ticket.tags.map((tag, i) => (
-                    <div key={`${tag}${i}`}>tag</div>
-                  ))}
+                <Grid item xs={12} className={classes.titleContainer}>
+                  <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                    {ticket.title}
+                  </Typography>
                 </Grid>
-                <Grid item>icons</Grid>
+
+                <Grid item xs={12} className={classes.tagsContainer}>
+                  {/* <Box className={classes.tagsContainer}> */}
+                  {ticket.tags.map((tag, i) => (
+                    <Tag key={`${tag}${i}`} tag={tag} />
+                  ))}
+                  {/* </Box> */}
+                </Grid>
+                <Grid item xs={12}>
+                  <Box className={classes.commentsContainer}>
+                    <Badge color="secondary" badgeContent={4}>
+                      <ChatBubble />
+                    </Badge>
+                  </Box>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

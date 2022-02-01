@@ -1,19 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Container, Typography, Avatar, Paper, Box } from "@mui/material";
+import {
+  Grid,
+  Container,
+  Typography,
+  Avatar,
+  Paper,
+  Box,
+  Button,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 import useStyles from "../styles/pages/ticket.styles";
-import { getTicketById } from "../utils/ticketRequests";
+import {
+  getTicketById,
+  resolveTicket,
+  unResolveTicket,
+} from "../utils/ticketRequests";
 import { useParams } from "react-router-dom";
 import * as moment from "moment";
 import { getUserById } from "../utils/userRequests";
-import { Image } from "cloudinary-react";
+import Tag from "../components/Tag";
+import ImageGallery from "../components/ImageGallery";
+import UserAvatar from "../components/UserAvatar";
+import useAuth from "../contexts/useAuth";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
-  const [user, setUser] = useState(null);
+  const [ticketUser, setTicketUser] = useState(null);
 
+  const { user } = useAuth();
   const classes = useStyles();
   const { ticket_id } = useParams();
-  //   61f11831cefdb7825ca660b1
+
+  const resolveButton =
+    ticket && !(user.role === "Tutor" && ticket.resolved === false);
+  const unResolveButton =
+    ticket && !(user.role === "Tutor" && ticket.resolved === true);
 
   useEffect(() => {
     getTicketById(ticket_id).then((data) => {
@@ -24,15 +45,22 @@ const Ticket = () => {
   useEffect(() => {
     if (ticket) {
       getUserById(ticket.user).then((data2) => {
-        setUser(data2);
+        setTicketUser(data2);
       });
     }
   }, [ticket]);
-  console.log(ticket);
+
+  const submitResolveTicket = () => {
+    resolveTicket(ticket._id).then((data) => setTicket(data));
+  };
+  const submitUnResolveTicket = () => {
+    unResolveTicket(ticket._id).then((data) => setTicket(data));
+  };
+
   return (
     <Container maxWidth="md">
-      {ticket && user ? (
-        <Grid container>
+      {ticket && ticketUser ? (
+        <Grid container className={classes.ticketContainer}>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
               <Grid xs={12} item className={classes.titleContainer}>
@@ -40,24 +68,32 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <Avatar>
-                    <Image
-                      width="100%"
-                      cloudName="turbo-hamster"
-                      publicId={user.avatar}
-                    />
-                  </Avatar>
-
-                  <Typography variant="body2">{user.name}</Typography>
+                  <UserAvatar publicId={ticketUser.avatar} online={true} />
+                  <Link
+                    to={`/users/${ticket.user}`}
+                    className={classes.userNameLink}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{ marginLeft: "10px", fontWeight: "bold" }}
+                    >
+                      {ticketUser.name}
+                    </Typography>
+                  </Link>
                 </Box>
               </Grid>
-              <Grid xs={12} item>
+              <Grid xs={12} item className={classes.dateContainer}>
                 <Typography variant="body2">
                   {moment(
                     ticket.created_at.toString(),
                     "YYYYMMDD HH:mm:ss"
                   ).fromNow()}
                 </Typography>
+              </Grid>
+              <Grid item className={classes.tagsContainer}>
+                {ticket.tags.map((tag, i) => (
+                  <Tag key={`${tag}${i}`} tag={tag}></Tag>
+                ))}
               </Grid>
             </Grid>
           </Grid>
@@ -66,19 +102,33 @@ const Ticket = () => {
               <Grid xs={12} item className={classes.gridItem}>
                 Zoom button
               </Grid>
-              <Grid xs={12} item className={classes.gridItem}>
-                <Typography variant="body1">{ticket.body}</Typography>
+              <Grid xs={6} item className={classes.gridItem}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  disabled={resolveButton}
+                  onClick={submitResolveTicket}
+                >
+                  Resolve ticket
+                </Button>
+              </Grid>
+              <Grid xs={6} item className={classes.gridItem}>
+                <Button
+                  variant="contained"
+                  color="error"
+                  disabled={unResolveButton}
+                  onClick={submitUnResolveTicket}
+                >
+                  Unresolve
+                </Button>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
-                {ticket.images.map((image) => (
-                  <Image
-                    key={image}
-                    width="100"
-                    cloudName="turbo-hamster"
-                    crop="scale"
-                    publicId={image}
-                  />
-                ))}
+                <Paper variant="outlined" className={classes.bodyPaper}>
+                  <Typography variant="body1">{ticket.body}</Typography>
+                </Paper>
+              </Grid>
+              <Grid xs={12} item className={classes.gridItem}>
+                <ImageGallery images={ticket.images} />
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>
                 <Grid container>
