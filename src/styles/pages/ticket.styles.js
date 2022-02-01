@@ -40,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
+  commentSectionContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    marginBottom: theme.spacing(5),
+  },
 }));
 
 export default useStyles;
