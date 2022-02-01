@@ -1,4 +1,4 @@
-import Login from "../components/Login";
+import LoginForm from "../components/LoginForm";
 import { Button, Box, Container, Grid, Typography } from "@mui/material";
 import logo from "../assets/hamsterlogo.png";
 import useStyles from "../styles/pages/login.styles";
@@ -33,7 +33,7 @@ const LoginPage = () => {
           />{" "}
         </Grid>
         <Grid item>
-          <Button>Open Stack</Button> <Login />
+          <Button>Open Stack</Button> <LoginForm />
         </Grid>
       </Grid>
       <Button onClick={() => navigate("/register")}>Register</Button>

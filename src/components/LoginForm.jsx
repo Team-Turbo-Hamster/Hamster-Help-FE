@@ -7,15 +7,11 @@ import {
   IconButton,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import useAuth from "../contexts/useAuth";
-import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [values, setValues] = useState({
-    username: "quatre29@email.com",
-    password: "Qweqweqwe2",
-  });
+const LoginForm = () => {
+  const [values, setValues] = useState({ username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
   const { signIn, user } = useAuth();
@@ -35,7 +31,9 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     signIn(values);
+
     setValues({
       username: "",
       password: "",
@@ -85,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;
