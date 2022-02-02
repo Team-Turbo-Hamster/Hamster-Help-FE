@@ -8,7 +8,6 @@ import UserAvatar from "../components/UserAvatar";
 const SettingsMenu = (setOpenDrawer) => {
   const { toggleColorMode, mode } = useColorMode();
   const { signOut, user } = useAuth();
-
   const classes = useStyles();
 
   return (
