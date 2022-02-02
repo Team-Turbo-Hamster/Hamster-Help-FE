@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     width: "100%",
     paddingTop: theme.spacing(1),
+    // overflow: "scroll",
   },
   avatarContainer: {
     display: "flex",
@@ -56,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
   },
   privateTicketContainer: {
     padding: theme.spacing(3),
+  },
+  cardWrapContainer: {
+    marginBottom: theme.spacing(3),
   },
 }));
 

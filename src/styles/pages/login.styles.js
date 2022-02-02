@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     textAlign: "center",
     textShadow: "2px 2px #2b6777",
-    color: theme.palette.primary.light,
+    // color: theme.palette.primary.light,
   },
 
   smallText: {

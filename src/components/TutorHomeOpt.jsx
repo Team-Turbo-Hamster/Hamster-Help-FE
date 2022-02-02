@@ -9,12 +9,12 @@ const TutorHomeOpt = () => {
 
   return (
     <div className={classes.container}>
-      <Button variant="outlined" className={classes.button}>
+      <Button variant="contained" className={classes.button}>
         Jump right in
       </Button>
       <Button
+        variant="contained"
         onClick={() => navigate("/queue")}
-        variant="outlined"
         className={classes.button}
       >
         View Queue

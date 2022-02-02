@@ -49,7 +49,6 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
 
   return (
     <>
-      <Divider />
       <Grid container className={classes.addCommentContainer}>
         <Grid item xs={1}>
           <UserAvatar

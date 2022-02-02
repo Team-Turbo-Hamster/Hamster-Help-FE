@@ -9,16 +9,16 @@ const useStyles = makeStyles((theme) => ({
   commentTextArea: {
     fontFamily: "inherit",
     padding: "0.25em 0.5em",
-    borderColor: "#ccc",
+    borderColor: theme.palette.primary.light,
     lineHeight: "1",
-    borderRadius: "5px",
+    borderRadius: "15px",
     width: "100%",
     resize: "none",
     padding: theme.spacing(2),
 
     "&:focus": {
       outline: "none",
-      border: `2px solid ${indigo["A400"]}`,
+      border: `2px solid ${theme.palette.primary.main}`,
     },
   },
   avatarAddComment: {

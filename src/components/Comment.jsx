@@ -48,7 +48,9 @@ const Comment = ({ comment, ticketId, setTicket }) => {
                   className={classes.commentUsernameLink}
                   to={`/users/${comment.user._id}`}
                 >
-                  {comment.user.name}
+                  <span className={classes.nameContainer}>
+                    {comment.user.name}
+                  </span>
                 </Link>
                 •
                 <span className={classes.dateSpan}>

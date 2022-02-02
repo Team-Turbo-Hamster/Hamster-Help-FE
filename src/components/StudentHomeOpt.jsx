@@ -11,19 +11,19 @@ const StudentHomeOpt = () => {
     <div className={classes.container}>
       <Button
         onClick={() => navigate("/new-ticket")}
-        variant="outlined"
+        variant="contained"
         className={classes.button}
       >
         Create a Ticket
       </Button>
       <Button
         onClick={() => navigate("/queue")}
-        variant="outlined"
+        variant="contained"
         className={classes.button}
       >
         Open Queue
       </Button>
-      <Button variant="outlined" className={classes.lastButton}>
+      <Button variant="contained" className={classes.lastButton}>
         Open Stack
       </Button>
     </div>

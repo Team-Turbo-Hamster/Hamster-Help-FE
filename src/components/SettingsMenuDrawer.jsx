@@ -11,7 +11,13 @@ const SettingsMenu = (setOpenDrawer) => {
   const classes = useStyles();
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
+    <Box
+      sx={(theme) => ({
+        flexGrow: 0,
+        backgroundColor: theme.palette.primary.light,
+        height: "100%",
+      })}
+    >
       <List>
         <ListItem className={classes.avatarContainer}>
           <UserAvatar publicId={user.avatar} online={true} />

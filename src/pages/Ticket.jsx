@@ -24,7 +24,9 @@ import ImageGallery from "../components/ImageGallery";
 import UserAvatar from "../components/UserAvatar";
 import useAuth from "../contexts/useAuth";
 import TicketCommentSection from "../components/TicketCommentSection";
-import { ConstructionOutlined } from "@mui/icons-material";
+
+import CardWrap from "../components/CardWrap";
+
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -68,86 +70,118 @@ const Ticket = () => {
     <Container maxWidth="md">
       {ticket ? (
         <Grid container className={classes.ticketContainer}>
+          {/* <CardWrap> */}
           <Grid item xs={12} className={classes.gridItem}>
-            <Grid container>
-              <Grid xs={12} item className={classes.titleContainer}>
-                <Typography variant="h5">{ticket.title}</Typography>
-              </Grid>
-              <Grid xs={12} item>
-                <Box className={classes.avatarContainer}>
-                  <UserAvatar publicId={ticket.user.avatar} online={true} />
-                  <Link
-                    to={`/users/${ticket.user}`}
-                    className={classes.userNameLink}
+            <Grid container className={classes.headerContainer}>
+              <CardWrap className={classes.headerCardWrap} secondary>
+                <Grid xs={12} item className={classes.titleContainer}>
+                  <Typography
+                    variant="h3"
+                    sx={(theme) => ({
+                      color: theme.palette.primary.dark,
+                      fontWeight: "bold",
+                    })}
+
                   >
-                    <Typography
-                      variant="body2"
-                      sx={{ marginLeft: "10px", fontWeight: "bold" }}
+                    {ticket.title}
+                  </Typography>
+                </Grid>
+                <Grid xs={12} item>
+                  <Box className={classes.avatarContainer}>
+                    <UserAvatar publicId={ticketUser.avatar} online={true} />
+                    <Link
+                      to={`/users/${ticket.user}`}
+                      className={classes.userNameLink}
                     >
-                      {ticket.user.name}
-                    </Typography>
-                  </Link>
-                </Box>
-              </Grid>
-              <Grid xs={12} item className={classes.dateContainer}>
-                <Typography variant="body2">
-                  {moment(
-                    ticket.created_at.toString(),
-                    "YYYYMMDD HH:mm:ss"
-                  ).fromNow()}
-                </Typography>
-              </Grid>
-              <Grid xs={12} item className={classes.tagsContainer}>
-                {ticket.tags.map((tag, i) => (
-                  <Tag key={`${tag}${i}`} tag={tag}></Tag>
-                ))}
-              </Grid>
-              <Grid item xs={12} className={classes.privateChipContainer}>
-                {ticket.isPrivate && <Chip label="Private" color="error" />}
-              </Grid>
+                      <Typography
+                        variant="h5"
+                        sx={(theme) => ({
+                          marginLeft: "10px",
+                          fontWeight: "bold",
+                          color: theme.palette.primary.dark,
+                        })}
+                      >
+                        {ticketUser.name}
+                      </Typography>
+                    </Link>
+                  </Box>
+                </Grid>
+                <Grid xs={12} item className={classes.dateContainer}>
+                  <Typography
+                    variant="body1"
+                    sx={(theme) => ({
+                      color: theme.palette.primary.dark,
+                    })}
+                  >
+                    {moment(
+                      ticket.created_at.toString(),
+                      "YYYYMMDD HH:mm:ss"
+                    ).fromNow()}
+                  </Typography>
+                </Grid>
+                <Grid xs={12} item className={classes.tagsContainer}>
+                  {ticket.tags.map((tag, i) => (
+                    <Tag key={`${tag}${i}`} tag={tag}></Tag>
+                  ))}
+                </Grid>
+                <Grid item xs={12} className={classes.privateChipContainer}>
+                  {ticket.isPrivate && <Chip label="Private" color="error" />}
+                </Grid>
+              </CardWrap>
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container className={classes.bodyContainer}>
-              <Grid xs={12} item className={classes.gridItem}>
-                Zoom button
-              </Grid>
-              <Grid xs={6} item className={classes.gridItem}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  disabled={resolveButton}
-                  onClick={submitResolveTicket}
-                >
-                  Close Ticket
-                </Button>
-              </Grid>
-              <Grid xs={6} item className={classes.gridItem}>
-                <Button
-                  variant="contained"
-                  color="success"
-                  disabled={unResolveButton}
-                  onClick={submitUnResolveTicket}
-                >
-                  Reopen
-                </Button>
-              </Grid>
-              <Grid xs={12} item className={classes.gridItem}>
-                <Paper variant="outlined" className={classes.bodyPaper}>
-                  <Typography variant="body1">{ticket.body}</Typography>
-                </Paper>
-              </Grid>
-              <Grid xs={12} item className={classes.gridItem}>
-                <ImageGallery images={ticket.images} />
-              </Grid>
+              <CardWrap secondary className={classes.buttonCardWrap}>
+                <Grid container>
+                  <Grid xs={12} item className={classes.gridItem}>
+                    Zoom button
+                  </Grid>
+                  <Grid xs={6} item className={classes.gridItem}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      disabled={resolveButton}
+                      onClick={submitResolveTicket}
+                    >
+                      Close Ticket
+                    </Button>
+                  </Grid>
+                  <Grid xs={6} item className={classes.gridItem}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      disabled={unResolveButton}
+                      onClick={submitUnResolveTicket}
+                    >
+                      Reopen
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardWrap>
+              <CardWrap secondary className={classes.ticketBodyWrap}>
+                <Grid xs={12} item className={classes.gridItem}>
+                  <Paper variant="outlined" className={classes.bodyPaper}>
+                    <Typography variant="body1">{ticket.body}</Typography>
+                  </Paper>
+                </Grid>
+                <Grid xs={12} item className={classes.gridItem}>
+                  <ImageGallery images={ticket.images} />
+                </Grid>
+              </CardWrap>
               <Grid xs={12} item className={classes.commentSectionContainer}>
-                <TicketCommentSection ticket={ticket} setTicket={setTicket} />
+                <CardWrap secondary className={classes.commentsCardWrap}>
+                  <TicketCommentSection ticket={ticket} setTicket={setTicket} />
+                </CardWrap>
               </Grid>
             </Grid>
           </Grid>
+          {/* </CardWrap> */}
         </Grid>
       ) : (
-        <p>loading...</p>
+        <CardWrap>
+          <p>loading...</p>
+        </CardWrap>
       )}
     </Container>
   );

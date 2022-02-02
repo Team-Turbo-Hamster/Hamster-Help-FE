@@ -8,6 +8,7 @@ import {
   SwipeableDrawer,
   Divider,
   IconButton,
+  Box,
 } from "@mui/material";
 import { ChevronRight } from "@mui/icons-material";
 import SettingsMenu from "./SettingsMenu";
@@ -15,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import SettingsMenuDrawer from "./SettingsMenuDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import BackButton from "./BackButton";
+import CottageIcon from "@mui/icons-material/Cottage";
 
 const Navbar = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -33,15 +35,16 @@ const Navbar = (props) => {
             <Hidden smUp>
               <BackButton />
             </Hidden>
-            <Typography
-              onClick={() => navigate("/")}
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, mr: 2, cursor: "pointer", marginLeft: 2 }}
-            >
-              Hamster Help
-            </Typography>
+            <Box sx={{ flexGrow: 1, mr: 2, cursor: "pointer", marginLeft: 2 }}>
+              <IconButton
+                onClick={() => navigate("/")}
+                sx={(theme) => ({
+                  color: theme.palette.primary.light,
+                })}
+              >
+                <CottageIcon />
+              </IconButton>
+            </Box>
 
             <Hidden smUp>
               <IconButton
@@ -51,6 +54,9 @@ const Navbar = (props) => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={() => setOpenDrawer(true)}
+                sx={(theme) => ({
+                  color: theme.palette.primary.dark,
+                })}
               >
                 <MenuIcon />
               </IconButton>
@@ -66,7 +72,11 @@ const Navbar = (props) => {
           onClose={() => setOpenDrawer(false)}
           anchor="right"
         >
-          <div>
+          <Box
+            sx={(theme) => ({
+              background: theme.palette.primary.main,
+            })}
+          >
             <IconButton
               color="secondary"
               size="large"
@@ -74,10 +84,13 @@ const Navbar = (props) => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={() => setOpenDrawer(false)}
+              sx={(theme) => ({
+                color: theme.palette.primary.dark,
+              })}
             >
               <ChevronRight />
             </IconButton>
-          </div>
+          </Box>
           <Divider />
           <SettingsMenuDrawer setOpenDrawer={setOpenDrawer} />
         </SwipeableDrawer>

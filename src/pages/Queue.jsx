@@ -4,6 +4,7 @@ import useStyles from "../styles/pages/queue.styles";
 import { getUnresolvedTickets } from "../utils/ticketRequests";
 import TicketsList from "../components/TicketsList";
 import { SocketContext } from "../contexts/socket";
+import TextComponent from "../components/TextComponent";
 
 const Queue = () => {
   const socket = useContext(SocketContext);
@@ -36,8 +37,8 @@ const Queue = () => {
   return (
     <Container maxWidth="md">
       <Grid container className={classes.container}>
-        <Grid xs={12} item>
-          <Typography variant="h5">Queue</Typography>
+        <Grid xs={12} item className={classes.titleContainer}>
+          <TextComponent text="Queue" variant="h2" />
         </Grid>
         <Grid xs={12} item>
           <TicketsList tickets={tickets} />

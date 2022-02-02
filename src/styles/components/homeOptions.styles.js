@@ -10,11 +10,17 @@ const useStyles = makeStyles((theme) => ({
     // padding: theme.spacing(0, 10, 4, 10),
   },
   button: {
-    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+    width: "30%",
     marginBottom: theme.spacing(4),
   },
   lastButton: {
-    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+    },
+    width: "30%",
   },
 }));
 
