@@ -126,7 +126,7 @@ const Login = () => {
         {HelperText("password")}
       </FormControl>
       <br />
-      <Button variant="text" type="Submit" disabled={buttonDisabled}>
+      <Button variant="text" type="Submit">
         Submit
       </Button>
     </form>
