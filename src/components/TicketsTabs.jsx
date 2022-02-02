@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Tabs, Tab, Box } from "@mui/material";
+import { Container, Tab, Box } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import TicketsList from "./TicketsList";
 

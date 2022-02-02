@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import useStyles from "../styles/pages/tag-page.styles";
 import { Grid, Container, Typography, Paper } from "@mui/material";
 import { getTicketsByTag } from "../utils/ticketRequests";
-import TicketCard from "../components/TicketCard";
-import TicketsList from "../components/TicketsList";
 import TicketsTabs from "../components/TicketsTabs";
 
 const TagPage = () => {
