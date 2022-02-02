@@ -132,7 +132,7 @@ const Ticket = () => {
                 <ImageGallery images={ticket.images} />
               </Grid>
               <Grid xs={12} item className={classes.commentSectionContainer}>
-                <TicketCommentSection />
+                <TicketCommentSection ticket={ticket} setTicket={setTicket} />
               </Grid>
             </Grid>
           </Grid>

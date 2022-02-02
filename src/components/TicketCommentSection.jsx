@@ -4,8 +4,9 @@ import useStyles from "../styles/components/comment-section.styles";
 import useAuth from "../contexts/useAuth";
 import UserAvatar from "./UserAvatar";
 import Comment from "./Comment";
+import { postComment } from "../utils/commentsRequests";
 
-const TicketCommentSection = () => {
+const TicketCommentSection = ({ ticket, setTicket }) => {
   const [commentState, setCommentState] = useState("");
   const classes = useStyles();
   const { user } = useAuth();
@@ -13,7 +14,9 @@ const TicketCommentSection = () => {
   const onSubmitComment = (e) => {
     e.preventDefault();
     if (commentState > "") {
-      console.log("comment dispatched");
+      postComment(ticket._id, commentState).then((data) => {
+        setTicket(data);
+      });
     } else {
       console.error("comment section must not be empty");
     }
@@ -45,9 +48,14 @@ const TicketCommentSection = () => {
         </Grid>
       </Grid>
       <Grid container>
-        <Comment />
-        <Comment />
-        <Comment />
+        {ticket.comments.map((comment, i) => (
+          <Comment
+            key={`${comment._id}${i}`}
+            ticketId={ticket._id}
+            comment={comment}
+            setTicket={setTicket}
+          />
+        ))}
       </Grid>
     </>
   );

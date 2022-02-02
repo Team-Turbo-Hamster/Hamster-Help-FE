@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme) => ({
   comment: {
     paddingTop: theme.spacing(1),
   },
+  dateSpan: {
+    marginLeft: theme.spacing(1),
+  },
   commentUsernameLink: {
+    marginRight: theme.spacing(1),
     textDecoration: "none",
     color: "#8b8989",
     "&:hover": {

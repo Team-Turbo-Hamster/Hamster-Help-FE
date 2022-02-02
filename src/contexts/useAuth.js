@@ -11,14 +11,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("AUTH start");
     const token = localStorage.getItem("user-token");
     if (token) {
       loadUser(token).then((data) => {
         setUser(data);
         setLoadingInitial(false);
+        console.log("END load user");
       });
     } else {
       setLoadingInitial(false);
+      console.log("END loading initial");
     }
   }, []);
 
