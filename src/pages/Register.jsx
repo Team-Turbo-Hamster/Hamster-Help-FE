@@ -11,6 +11,7 @@ const Register = () => {
       <div> Our Logo dot png</div>
       <p> Please register for access</p>
       <div>
+        <br />
         <Registration />
       </div>
       <Button onClick={() => navigate("/login")}>Login</Button>
