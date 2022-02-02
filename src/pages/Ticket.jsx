@@ -121,7 +121,7 @@ const Ticket = () => {
               <Grid xs={6} item className={classes.gridItem}>
                 <Button
                   variant="contained"
-                  color="error"
+                  color="secondary"
                   disabled={resolveButton}
                   onClick={submitResolveTicket}
                 >

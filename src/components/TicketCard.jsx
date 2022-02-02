@@ -30,8 +30,6 @@ const TicketCard = ({ ticket }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  console.log(userTicket);
-
   let seePrivate = user.role === "Tutor" || userTicket?._id === user._id;
 
   useEffect(() => {
