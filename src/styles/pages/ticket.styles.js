@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     marginBottom: theme.spacing(5),
   },
+  privateChipContainer: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 export default useStyles;

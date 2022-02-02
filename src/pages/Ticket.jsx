@@ -1,5 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Grid, Container, Typography, Paper, Box, Button } from "@mui/material";
+import {
+  Grid,
+  Container,
+  Typography,
+  Avatar,
+  Paper,
+  Box,
+  Button,
+  Chip,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import useStyles from "../styles/pages/ticket.styles";
 import {
@@ -25,9 +34,17 @@ const Ticket = () => {
   const { ticket_id } = useParams();
 
   const resolveButton =
-    ticket && !(user.role === "Tutor" && ticket.resolved === false);
+    ticket &&
+    !(
+      (user.role === "Tutor" && ticket.resolved === false) ||
+      (ticket.user === user._id && ticket.resolved === false)
+    );
   const unResolveButton =
-    ticket && !(user.role === "Tutor" && ticket.resolved === true);
+    ticket &&
+    !(
+      (user.role === "Tutor" && ticket.resolved === true) ||
+      (ticket.user === user._id && ticket.resolved === true)
+    );
 
   useEffect(() => {
     getTicketById(ticket_id).then((data) => {
@@ -35,8 +52,19 @@ const Ticket = () => {
     });
   }, [ticket_id]);
 
+  useEffect(() => {
+    if (ticket) {
+      getUserById(ticket.user).then((data2) => {
+        setTicketUser(data2);
+      });
+    }
+  }, [ticket]);
+
   const submitResolveTicket = () => {
-    resolveTicket(ticket._id).then((data) => setTicket(data));
+    resolveTicket(ticket._id).then((data) => {
+      console.log("data back", data);
+      setTicket(data);
+    });
   };
   const submitUnResolveTicket = () => {
     unResolveTicket(ticket._id).then((data) => setTicket(data));
@@ -44,7 +72,7 @@ const Ticket = () => {
 
   return (
     <Container maxWidth="md">
-      {ticket ? (
+      {ticket && ticketUser ? (
         <Grid container className={classes.ticketContainer}>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
@@ -53,7 +81,7 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <UserAvatar publicId={ticket.user.avatar} online={true} />
+                  <UserAvatar publicId={ticketUser.avatar} online={true} />
                   <Link
                     to={`/users/${ticket.user}`}
                     className={classes.userNameLink}
@@ -62,7 +90,7 @@ const Ticket = () => {
                       variant="body2"
                       sx={{ marginLeft: "10px", fontWeight: "bold" }}
                     >
-                      {ticket.user.name}
+                      {ticketUser.name}
                     </Typography>
                   </Link>
                 </Box>
@@ -75,10 +103,13 @@ const Ticket = () => {
                   ).fromNow()}
                 </Typography>
               </Grid>
-              <Grid item className={classes.tagsContainer}>
+              <Grid xs={12} item className={classes.tagsContainer}>
                 {ticket.tags.map((tag, i) => (
                   <Tag key={`${tag}${i}`} tag={tag}></Tag>
                 ))}
+              </Grid>
+              <Grid item xs={12} className={classes.privateChipContainer}>
+                {ticket.isPrivate && <Chip label="Private" color="error" />}
               </Grid>
             </Grid>
           </Grid>
@@ -90,21 +121,21 @@ const Ticket = () => {
               <Grid xs={6} item className={classes.gridItem}>
                 <Button
                   variant="contained"
-                  color="success"
+                  color="secondary"
                   disabled={resolveButton}
                   onClick={submitResolveTicket}
                 >
-                  Resolve ticket
+                  Close Ticket
                 </Button>
               </Grid>
               <Grid xs={6} item className={classes.gridItem}>
                 <Button
                   variant="contained"
-                  color="error"
+                  color="success"
                   disabled={unResolveButton}
                   onClick={submitUnResolveTicket}
                 >
-                  Unresolve
+                  Reopen
                 </Button>
               </Grid>
               <Grid xs={12} item className={classes.gridItem}>

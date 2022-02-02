@@ -11,8 +11,8 @@ import {
   Avatar,
   Snackbar,
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-import useStyles from '../styles/components/registerForm.styles.jsx'
+import CloseIcon from "@mui/icons-material/Close";
+import useStyles from "../styles/components/registerForm.styles.jsx";
 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const NewUserForm = () => {
     showPassword: false,
   });
   const navigate = useNavigate();
-  const [snackbarOpen, setSnackbarOpen] = useState(true)
+  const [snackbarOpen, setSnackbarOpen] = useState(true);
 
   const tests = {
     username: /^[a-zA-Z\s-]{4,15}$/,
@@ -77,30 +77,21 @@ const NewUserForm = () => {
     handleFormComplete();
   };
   const handleSnackbarClose = () => {
-    setSnackbarOpen(false)
-  }
+    setSnackbarOpen(false);
+  };
 
   const closeSnack = (
     <>
-
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleSnackbarClose}
-      >
+      <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
   );
 
-
-
   const handleHelperText = (prop, helperText) => {
-
     return testsPassed.hasOwnProperty(prop) ? (
       testsPassed[prop] === true ? (
-       <></>
+        <></>
       ) : (
         <Alert severity="error">{helperText}</Alert>
       )
@@ -162,15 +153,10 @@ const NewUserForm = () => {
 
   return (
     <form id="registerForm" onSubmit={handleSubmit}>
-      
       <Avatar src={values.avatar} />
 
-      <input
-        accept=".png, .jpg, .jpeg"
-        type="file"
-        name="avatar"
-        onChange={handleFileInputChange}
-      /><br />
+      <input accept=".png, .jpg, .jpeg" type="file" name="avatar" onChange={handleFileInputChange} />
+      <br />
       {/* Username field */}
       {/* _______________________________________________________ */}
       <FormControl sx={{ m: 1, width: "30ch" }}>
@@ -182,10 +168,7 @@ const NewUserForm = () => {
           onBlur={handleBlur("username")}
           onChange={handleChange("username")}
         />
-        {handleHelperText(
-          "username",
-          "username must be 1-30 characters long and contain only letters or spaces"
-        )}
+        {handleHelperText("username", "username must be 1-30 characters long and contain only letters or spaces")}
       </FormControl>
       <br />
       <FormControl sx={{ m: 1, width: "30ch" }}>
@@ -211,10 +194,7 @@ const NewUserForm = () => {
           onBlur={handleBlur("email")}
           onChange={handleChange("email")}
         />
-        {handleHelperText(
-          "email",
-          'Email must be a valid email address; "example@domain.tag"'
-        )}
+        {handleHelperText("email", 'Email must be a valid email address; "example@domain.tag"')}
       </FormControl>
       <br />
       {/* Password field */}
@@ -276,16 +256,12 @@ const NewUserForm = () => {
       <br />
       {/* Tutor toggle */}
       {/* _______________________________________________________ */}
-      <FormControlLabel
-        control={<Switch onChange={setTutor} />}
-        label="I am a tutor"
-      />
-      <br />
+      <FormControlLabel control={<Switch onChange={setTutor} />} label="I am a tutor" />
       <br />
 
       <Button
         id="RegisterButton"
-        variant="text"
+        variant={buttonDisabled ? "outlined" : "contained"}
         type="Submit"
         disabled={buttonDisabled}
       >

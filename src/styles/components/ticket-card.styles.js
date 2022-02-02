@@ -36,11 +36,26 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
   },
+  socialsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   commentsContainer: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "100%",
     paddingTop: theme.spacing(2),
+    width: "100%",
+  },
+  privateContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    paddingTop: theme.spacing(2),
+  },
+  privateTicketContainer: {
+    padding: theme.spacing(3),
   },
 }));
 

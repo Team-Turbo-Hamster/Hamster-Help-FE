@@ -42,7 +42,7 @@ const Comment = ({ comment, ticketId, setTicket }) => {
       <Grid item xs={11}>
         <div className={classes.bodyContainer}>
           <Grid container className={classes.commentTitle}>
-            <Grid item xs={6}>
+            <Grid item xs={10}>
               <Typography variant="" sx={{ fontWeight: "bold" }}>
                 <Link
                   className={classes.commentUsernameLink}
@@ -61,7 +61,7 @@ const Comment = ({ comment, ticketId, setTicket }) => {
                 </span>
               </Typography>
             </Grid>
-            <Grid item xs={6} className={classes.menuItem}>
+            <Grid item xs={2} className={classes.menuItem}>
               <div>
                 <IconButton
                   size="small"

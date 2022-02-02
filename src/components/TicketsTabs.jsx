@@ -11,13 +11,15 @@ const TicketsTabs = ({ tickets }) => {
   useEffect(() => {
     let resolved = [];
     let unresolved = [];
-    tickets.forEach((ticket) => {
-      if (ticket.resolved) {
-        resolved.push(ticket);
-      } else {
-        unresolved.push(ticket);
-      }
-    });
+    if (tickets) {
+      tickets.forEach((ticket) => {
+        if (ticket.resolved) {
+          resolved.push(ticket);
+        } else {
+          unresolved.push(ticket);
+        }
+      });
+    }
     setResolvedTickets(resolved);
     setUnResolvedTickets(unresolved);
   }, [tickets]);
@@ -31,8 +33,8 @@ const TicketsTabs = ({ tickets }) => {
       <TabContext value={tabValue}>
         <Box sx={{ width: "100%" }}>
           <TabList indicatorColor="primary" onChange={handleTabChange}>
-            <Tab value="1" label="Unresolved" />
-            <Tab value="2" label="Resolved" />
+            <Tab value="1" label="Opened" />
+            <Tab value="2" label="Closed" />
           </TabList>
         </Box>
         <TabPanel value="1" sx={{ padding: "0" }}>
