@@ -31,8 +31,8 @@ const TicketsTabs = ({ tickets }) => {
       <TabContext value={tabValue}>
         <Box sx={{ width: "100%" }}>
           <TabList indicatorColor="primary" onChange={handleTabChange}>
-            <Tab value="1" label="Unresolved" />
-            <Tab value="2" label="Resolved" />
+            <Tab value="1" label="Opened" />
+            <Tab value="2" label="Closed" />
           </TabList>
         </Box>
         <TabPanel value="1" sx={{ padding: "0" }}>

@@ -14,6 +14,7 @@ import SettingsMenu from "./SettingsMenu";
 import { useNavigate } from "react-router-dom";
 import SettingsMenuDrawer from "./SettingsMenuDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
+import BackButton from "./BackButton";
 
 const Navbar = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -29,12 +30,15 @@ const Navbar = (props) => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            <Hidden smUp>
+              <BackButton />
+            </Hidden>
             <Typography
               onClick={() => navigate("/")}
               variant="h6"
               noWrap
               component="div"
-              sx={{ flexGrow: 1, mr: 2, cursor: "pointer" }}
+              sx={{ flexGrow: 1, mr: 2, cursor: "pointer", marginLeft: 2 }}
             >
               Hamster Help
             </Typography>

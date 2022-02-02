@@ -10,10 +10,14 @@ import {
   Switch,
   FormGroup,
   FormControlLabel,
+  Chip,
+  Paper,
+  ListItem,
 } from "@mui/material";
 import useStyles from "../styles/pages/new-ticket.styles";
 import useAuth from "../contexts/useAuth";
-import ChipArray from "../components/ChipArray";
+import { createTicket } from "../utils/ticketRequests";
+import ChipArray from "../components/chipArray";
 import { SocketContext } from "../contexts/socket";
 
 const CreateTicket = () => {
@@ -31,6 +35,7 @@ const CreateTicket = () => {
     { key: 3, label: "React" },
     { key: 4, label: "Vuejs" },
   ]);
+
   const socket = useContext(SocketContext);
   const { user } = useAuth();
 
@@ -43,7 +48,9 @@ const CreateTicket = () => {
     ) : (
       setTagsInput(tagsInput.concat(" ", data))
     );
+
     validateTicket();
+
   };
 
   const previewFile = (file) => {
@@ -100,6 +107,7 @@ const CreateTicket = () => {
       console.log("Error!", error);
     }
   };
+
 
   useEffect(() => {
     socket.on("error", ({ error }) => {
@@ -222,6 +230,7 @@ const CreateTicket = () => {
             Missing fields
           </Typography>
         )}
+
         <Button onClick={submitTicket} disabled={buttonDisabled}>
           Create ticket
         </Button>
