@@ -17,7 +17,7 @@ import {
 import useStyles from "../styles/pages/new-ticket.styles";
 import useAuth from "../contexts/useAuth";
 import { createTicket } from "../utils/ticketRequests";
-import ChipArray from "../components/chipArray";
+import ChipArray from "../components/ChipArray";
 import { SocketContext } from "../contexts/socket";
 
 const CreateTicket = () => {
@@ -50,7 +50,6 @@ const CreateTicket = () => {
     );
 
     validateTicket();
-
   };
 
   const previewFile = (file) => {
@@ -107,7 +106,6 @@ const CreateTicket = () => {
       console.log("Error!", error);
     }
   };
-
 
   useEffect(() => {
     socket.on("error", ({ error }) => {
