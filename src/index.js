@@ -9,6 +9,7 @@ import { SocketContext, socket } from "./contexts/socket";
 import { ColorModeContextProvider } from "./styles/theme";
 import { CssBaseline } from "@mui/material";
 import { AuthProvider } from "./contexts/useAuth";
+import { StyledEngineProvider } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,8 +17,10 @@ ReactDOM.render(
       <ColorModeContextProvider>
         <AuthProvider>
           <BrowserRouter>
+  <StyledEngineProvider injectFirst>
             <CssBaseline />
             <App />
+    </StyledEngineProvider>
           </BrowserRouter>
         </AuthProvider>
       </ColorModeContextProvider>

@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("AUTH start");
     const token = localStorage.getItem("user-token");
 
     if (token) {
@@ -23,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       setLoadingInitial(false);
     } else {
       setLoadingInitial(false);
+      console.log("END loading initial");
     }
 
     return () => {
