@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useColorMode } from "../styles/theme";
 import useStyles from "../styles/components/settings-menu-drawer";
 import { Image } from "cloudinary-react";
+import UserAvatar from "../components/UserAvatar";
 
 const SettingsMenu = (setOpenDrawer) => {
   const { toggleColorMode, mode } = useColorMode();
@@ -25,13 +26,7 @@ const SettingsMenu = (setOpenDrawer) => {
     <Box sx={{ flexGrow: 0 }}>
       <List>
         <ListItem className={classes.avatarContainer}>
-          <Avatar>
-            <Image
-              width="100%"
-              cloudName="turbo-hamster"
-              publicId={user.avatar}
-            />
-          </Avatar>
+          <UserAvatar publicId={user.avatar} online={true} />
         </ListItem>
         <ListItem onClick={toggleColorMode} className={classes.menuItem}>
           {mode === "light" ? "Dark mode" : "Light mode"}

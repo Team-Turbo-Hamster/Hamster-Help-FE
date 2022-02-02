@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+  userNameLink: {
+    textDecoration: "none",
+    color: "inherit",
+  },
 }));
 
 export default useStyles;

@@ -9,7 +9,10 @@ import {
   IconButton,
   Alert,
   Avatar,
+  Snackbar,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import useStyles from "../styles/components/registerForm.styles.jsx";
 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -27,6 +30,7 @@ const NewUserForm = () => {
     showPassword: false,
   });
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(true);
 
   const tests = {
     username: /^[a-zA-Z\s-]{4,15}$/,
@@ -72,12 +76,22 @@ const NewUserForm = () => {
       : (testsPassed.passwordVerify = false);
     handleFormComplete();
   };
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  const closeSnack = (
+    <>
+      <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   const handleHelperText = (prop, helperText) => {
-    // console.log(testsPassed)
     return testsPassed.hasOwnProperty(prop) ? (
       testsPassed[prop] === true ? (
-        <Alert severity="success"></Alert>
+        <></>
       ) : (
         <Alert severity="error">{helperText}</Alert>
       )
@@ -136,11 +150,12 @@ const NewUserForm = () => {
 
   return (
     <form id="registerForm" onSubmit={handleSubmit}>
-      {/* Username field */}
-      {/* _______________________________________________________ */}
       <Avatar src={values.avatar} />
 
       <input accept=".png, .jpg, .jpeg" type="file" name="avatar" onChange={handleFileInputChange} />
+      <br />
+      {/* Username field */}
+      {/* _______________________________________________________ */}
       <FormControl sx={{ m: 1, width: "30ch" }}>
         <InputLabel>Username</InputLabel>
         <OutlinedInput
@@ -152,6 +167,7 @@ const NewUserForm = () => {
         />
         {handleHelperText("username", "username must be 1-30 characters long and contain only letters or spaces")}
       </FormControl>
+      <br />
       <FormControl sx={{ m: 1, width: "30ch" }}>
         <InputLabel>Name</InputLabel>
         <OutlinedInput
