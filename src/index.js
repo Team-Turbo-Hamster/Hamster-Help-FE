@@ -5,20 +5,23 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
+import { SocketContext, socket } from "./contexts/socket";
 import { ColorModeContextProvider } from "./styles/theme";
 import { CssBaseline } from "@mui/material";
 import { AuthProvider } from "./contexts/useAuth";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorModeContextProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <CssBaseline />
-          <App />
-        </BrowserRouter>
-      </AuthProvider>
-    </ColorModeContextProvider>
+    <SocketContext.Provider value={socket}>
+      <ColorModeContextProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <CssBaseline />
+            <App />
+          </BrowserRouter>
+        </AuthProvider>
+      </ColorModeContextProvider>
+    </SocketContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

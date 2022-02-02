@@ -126,10 +126,13 @@ const NewUserForm = () => {
       username: values.username,
     };
 
-    registerUser(userForm).then((data) => {
-      console.log(data, "****");
-      navigate("/login");
-    });
+    registerUser(userForm)
+      .then((data) => {
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     event.preventDefault();
   };

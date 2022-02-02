@@ -7,8 +7,6 @@ import UserAvatar from "../components/UserAvatar";
 import UserRoleBadge from "../components/UserRoleBadge";
 import useAuth from "../contexts/useAuth";
 import { getTicketsByUserId } from "../utils/ticketRequests";
-import TicketCard from "../components/TicketCard";
-import TicketsList from "../components/TicketsList";
 import TicketsTabs from "../components/TicketsTabs";
 
 const UserProfile = () => {

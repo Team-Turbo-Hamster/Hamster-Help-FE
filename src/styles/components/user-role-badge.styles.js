@@ -1,5 +1,4 @@
 import { makeStyles } from "@mui/styles";
-import { red } from "@mui/material/colors";
 
 const useStyles = makeStyles((theme) => ({
   container: {

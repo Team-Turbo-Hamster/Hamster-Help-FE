@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ThemeToggle from "./ThemeToggle";
 import useAuth from "../contexts/useAuth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useStyles from "../styles/components/settings-menu.styles";
 import { Image } from "cloudinary-react";
 

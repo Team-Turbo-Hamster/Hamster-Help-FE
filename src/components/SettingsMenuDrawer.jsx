@@ -1,19 +1,8 @@
-import { useState } from "react";
-import {
-  Avatar,
-  Box,
-  Tooltip,
-  Menu,
-  IconButton,
-  MenuItem,
-  List,
-  ListItem,
-} from "@mui/material";
+import { Box, List, ListItem } from "@mui/material";
 import useAuth from "../contexts/useAuth";
 import { Link } from "react-router-dom";
 import { useColorMode } from "../styles/theme";
 import useStyles from "../styles/components/settings-menu-drawer";
-import { Image } from "cloudinary-react";
 import UserAvatar from "../components/UserAvatar";
 
 const SettingsMenu = (setOpenDrawer) => {
