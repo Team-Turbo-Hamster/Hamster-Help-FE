@@ -20,7 +20,7 @@ const TicketCard = ({ ticket }) => {
 
   return (
     <Card className={classes.cardContainer} elevation={3}>
-      {ticket.user ? (
+      {ticket ? (
         <CardActionArea
           onClick={() => navigate(`/tickets/${ticket._id.toString()}`)}
         >

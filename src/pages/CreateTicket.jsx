@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -94,21 +94,25 @@ const CreateTicket = () => {
       console.log("Attempting to create ticket");
 
       setErrorInput(false);
-      socket.on("error", ({ error }) => {
-        console.log("Error!", error);
-        socket.removeAllListeners();
-      });
-      socket.on("new-ticket", ({ ticket }) => {
-        navigate(`/tickets/${ticket.id}`);
-        socket.removeAllListeners();
-      });
+
       socket.emit("create-ticket", { token, ticket });
     } catch (error) {
       console.log("Error!", error);
-    } finally {
-      socket.removeAllListeners();
     }
   };
+
+  useEffect(() => {
+    socket.on("error", ({ error }) => {
+      console.log("Error!", error);
+    });
+    socket.on("new-ticket", ({ ticket }) => {
+      navigate(`/tickets/${ticket._id}`);
+    });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  });
 
   return (
     <Container maxWidth="md">
