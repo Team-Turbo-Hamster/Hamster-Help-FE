@@ -16,7 +16,6 @@ import useStyles from "./styles/pages/app.styles";
 
 import TagPage from "./pages/TagPage";
 
-
 function App() {
   const { user } = useAuth();
   const classes = useStyles();

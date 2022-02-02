@@ -33,7 +33,7 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
             className={classes.avatarAddComment}
           />
         </Grid>
-        <Grid item xs={11}>
+        <Grid item xs={11} sx={{ width: "100%" }}>
           <textarea
             className={classes.commentTextArea}
             name="comment"

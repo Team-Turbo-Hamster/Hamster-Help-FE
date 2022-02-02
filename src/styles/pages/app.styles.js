@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   appContainer: {
-    backgroundColor: "red",
+    // backgroundColor: "red",
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
