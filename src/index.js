@@ -8,14 +8,17 @@ import reportWebVitals from "./reportWebVitals";
 import { ColorModeContextProvider } from "./styles/theme";
 import { CssBaseline } from "@mui/material";
 import { AuthProvider } from "./contexts/useAuth";
+import { StyledEngineProvider } from "@mui/material";
 
 ReactDOM.render(
   <React.StrictMode>
     <ColorModeContextProvider>
       <AuthProvider>
         <BrowserRouter>
-          <CssBaseline />
-          <App />
+          <StyledEngineProvider injectFirst>
+            <CssBaseline />
+            <App />
+          </StyledEngineProvider>
         </BrowserRouter>
       </AuthProvider>
     </ColorModeContextProvider>

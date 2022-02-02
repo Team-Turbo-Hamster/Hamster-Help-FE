@@ -4,6 +4,7 @@ import { indigo } from "@mui/material/colors";
 const useStyles = makeStyles((theme) => ({
   addCommentContainer: {
     marginTop: theme.spacing(4),
+    width: "100%",
   },
   commentTextArea: {
     fontFamily: "inherit",
