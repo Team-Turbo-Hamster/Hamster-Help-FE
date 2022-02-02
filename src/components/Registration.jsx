@@ -9,10 +9,9 @@ import {
   IconButton,
   Alert,
   Avatar,
-  Snackbar,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import useStyles from "../styles/components/registerForm.styles.jsx";
+import useStyles from "../styles/components/registerForm.styles";
 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
@@ -20,6 +19,7 @@ import { registerUser } from "../utils/authRequests";
 import { useNavigate } from "react-router-dom";
 
 const NewUserForm = () => {
+  const classes = useStyles();
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -153,13 +153,24 @@ const NewUserForm = () => {
 
   return (
     <form id="registerForm" onSubmit={handleSubmit}>
-      <Avatar src={values.avatar} />
+      <Avatar className={classes.avatar} src={values.avatar} />
 
-      <input accept=".png, .jpg, .jpeg" type="file" name="avatar" onChange={handleFileInputChange} />
+      <Button
+        className={classes.button}
+        variant="contained"
+        component="label"
+        accept=".png, .jpg, .jpeg"
+        type="file"
+        name="avatar"
+        onChange={handleFileInputChange}
+      >
+        Choose File
+        <input type="file" hidden />
+      </Button>
       <br />
       {/* Username field */}
       {/* _______________________________________________________ */}
-      <FormControl sx={{ m: 1, width: "30ch" }}>
+      <FormControl sx={{ m: 1, width: "30ch", marginTop: "5px" }}>
         <InputLabel>Username</InputLabel>
         <OutlinedInput
           id="usernameField"
