@@ -4,7 +4,8 @@ export const postComment = async (ticket_id, body) => {
   try {
     console.log(body);
     const comment = await axios.patch(
-      `/api/tickets/${ticket_id}/new-comment`,
+      `${process.env.REACT_APP_BACKEND_URL}
+      /api/tickets/${ticket_id}/new-comment`,
       {
         body,
       },
@@ -23,7 +24,8 @@ export const postComment = async (ticket_id, body) => {
 export const deleteComment = async (ticket_id, comment_id) => {
   try {
     const comment = await axios.patch(
-      `/api/tickets/${ticket_id}/remove-comment`,
+      `${process.env.REACT_APP_BACKEND_URL}
+      /api/tickets/${ticket_id}/remove-comment`,
       { comment_id },
       {
         headers: {
