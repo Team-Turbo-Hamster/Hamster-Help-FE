@@ -3,6 +3,8 @@ import axios from "axios";
 export const createUser = async (formData) => {
   try {
     const res = await axios.post("/api/users", formData);
+
+    return res.data.user;
   } catch (error) {
     console.log(error);
   }

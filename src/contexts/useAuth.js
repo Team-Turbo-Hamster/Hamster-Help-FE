@@ -1,10 +1,12 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { authenticate, loadUser } from "../utils/authRequests";
-import { useNavigate } from "react-router-dom";
+import { SocketContext } from "./socket";
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+  const socket = useContext(SocketContext);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const [loadingInitial, setLoadingInitial] = useState(true);
@@ -13,16 +15,21 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     console.log("AUTH start");
     const token = localStorage.getItem("user-token");
+
     if (token) {
-      loadUser(token).then((data) => {
-        setUser(data);
-        setLoadingInitial(false);
-        console.log("END load user");
+      socket.on("reauthenticated", () => {
+        setUser(jwt_decode(token));
       });
+      socket.emit("reuauthenticate", { token });
+      setLoadingInitial(false);
     } else {
       setLoadingInitial(false);
       console.log("END loading initial");
     }
+
+    return () => {
+      socket.removeAllListeners();
+    };
   }, []);
 
   const signIn = async (details) => {

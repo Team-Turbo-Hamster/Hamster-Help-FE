@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
 import {
   Box,
   Grid,
   Typography,
-  Avatar,
   Card,
-  CardMedia,
   CardActionArea,
   Badge,
   Hidden,
@@ -15,8 +12,6 @@ import { ChatBubble, LocalLibrarySharp } from "@mui/icons-material";
 
 import Tag from "./Tag";
 import useStyles from "../styles/components/ticket-card.styles";
-import { getUserById } from "../utils/userRequests";
-import { Image } from "cloudinary-react";
 import * as moment from "moment";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./UserAvatar";
@@ -32,20 +27,17 @@ const TicketCard = ({ ticket }) => {
 
   let seePrivate = user.role === "Tutor" || userTicket?._id === user._id;
 
-  useEffect(() => {
-    getUserById(ticket.user).then((data) => setUserTicket(data));
-  }, [ticket]);
 
-  const VisibleCard = userTicket ? (
+  const VisibleCard = (
     <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
       <Grid container className={classes.ticketContainer}>
         <Grid item>
-          <UserAvatar publicId={userTicket.avatar} online={true} />
+          <UserAvatar publicId={ticket.user.avatar} online={true} />
         </Grid>
         <Grid item xs={10} sm={11}>
           <Grid container className={classes.ticketContent}>
             <Grid item xs={12}>
-              <Typography variant="body1">{userTicket.name}</Typography>
+              <Typography variant="body1">{ticket.user.name}</Typography>
             </Grid>
             <Grid item className={classes.dateContainer}>
               <span>

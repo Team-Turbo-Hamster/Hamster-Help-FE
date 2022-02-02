@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Badge, Stack } from "@mui/material";
+import { Avatar, Badge } from "@mui/material";
 import { Image } from "cloudinary-react";
 import { styled } from "@mui/material/styles";
 

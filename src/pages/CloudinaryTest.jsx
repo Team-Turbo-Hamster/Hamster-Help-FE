@@ -14,8 +14,6 @@ const CloudinaryTest = () => {
     getAllUsers().then((data) => setUsers(data));
   }, []);
 
-  console.log(users);
-
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -39,7 +37,12 @@ const CloudinaryTest = () => {
 
   return (
     <div>
-      <img width="100" height="100" src={newUser.avatar} />
+      <img
+        width="100"
+        height="100"
+        src={newUser.avatar}
+        alt={"User's avatar"}
+      />
       <input
         accept=".png, .jpg, .jpeg"
         type="file"

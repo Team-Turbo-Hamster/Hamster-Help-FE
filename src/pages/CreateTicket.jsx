@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Grid,
   Container,
-  Box,
-  InputBase,
   Alert,
   Button,
-  InputLabel,
   OutlinedInput,
   Switch,
   FormGroup,
@@ -21,6 +18,7 @@ import useStyles from "../styles/pages/new-ticket.styles";
 import useAuth from "../contexts/useAuth";
 import { createTicket } from "../utils/ticketRequests";
 import ChipArray from "../components/chipArray";
+import { SocketContext } from "../contexts/socket";
 
 const CreateTicket = () => {
   const [title, setTitle] = useState("");
@@ -38,6 +36,7 @@ const CreateTicket = () => {
     { key: 4, label: "Vuejs" },
   ]);
 
+  const socket = useContext(SocketContext);
   const { user } = useAuth();
 
   const classes = useStyles();
@@ -49,6 +48,9 @@ const CreateTicket = () => {
     ) : (
       setTagsInput(tagsInput.concat(" ", data))
     );
+
+    validateTicket();
+
   };
 
   const previewFile = (file) => {
@@ -74,6 +76,16 @@ const CreateTicket = () => {
     );
   };
 
+  const validateTicket = () => {
+    if (
+      title.length > 0 &&
+      body.length > 0 &&
+      tagsInput.split(" ").length > 1
+    ) {
+      setButtonDisabled(false);
+    }
+  };
+
   const submitTicket = () => {
     const tagsArray = tagsInput.split(" ");
     const ticket = {
@@ -83,16 +95,32 @@ const CreateTicket = () => {
       images,
       isPrivate,
     };
+    const token = localStorage.getItem("user-token");
 
-    if (ticket.title.length > 0 && ticket.body.length > 0) {
-      createTicket(ticket).then((data) => {
-        navigate(`/tickets/${data.id}`);
-      });
+    try {
+      console.log("Attempting to create ticket");
+
       setErrorInput(false);
-    } else {
-      setErrorInput(true);
+
+      socket.emit("create-ticket", { token, ticket });
+    } catch (error) {
+      console.log("Error!", error);
     }
   };
+
+
+  useEffect(() => {
+    socket.on("error", ({ error }) => {
+      console.log("Error!", error);
+    });
+    socket.on("new-ticket", ({ ticket }) => {
+      navigate(`/tickets/${ticket._id}`);
+    });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  });
 
   return (
     <Container maxWidth="md">
@@ -102,7 +130,10 @@ const CreateTicket = () => {
           <OutlinedInput
             placeholder="Add title"
             fullWidth
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              validateTicket();
+            }}
             value={title}
             sx={(theme) => ({
               color:
@@ -124,7 +155,10 @@ const CreateTicket = () => {
           <OutlinedInput
             placeholder="Add ticket body"
             fullWidth
-            onChange={(e) => setBody(e.target.value)}
+            onChange={(e) => {
+              setBody(e.target.value);
+              validateTicket();
+            }}
             value={body}
             multiline
             minRows={4}
@@ -196,7 +230,8 @@ const CreateTicket = () => {
             Missing fields
           </Typography>
         )}
-        <Button onClick={submitTicket} disabled={false}>
+
+        <Button onClick={submitTicket} disabled={buttonDisabled}>
           Create ticket
         </Button>
       </Grid>

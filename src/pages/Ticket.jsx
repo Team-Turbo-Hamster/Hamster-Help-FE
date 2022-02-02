@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
   Grid,
   Container,
@@ -52,14 +53,6 @@ const Ticket = () => {
     });
   }, [ticket_id]);
 
-  useEffect(() => {
-    if (ticket) {
-      getUserById(ticket.user).then((data2) => {
-        setTicketUser(data2);
-      });
-    }
-  }, [ticket]);
-
   const submitResolveTicket = () => {
     resolveTicket(ticket._id).then((data) => {
       console.log("data back", data);
@@ -72,7 +65,7 @@ const Ticket = () => {
 
   return (
     <Container maxWidth="md">
-      {ticket && ticketUser ? (
+      {ticket ? (
         <Grid container className={classes.ticketContainer}>
           <Grid item xs={12} className={classes.gridItem}>
             <Grid container>
@@ -81,7 +74,7 @@ const Ticket = () => {
               </Grid>
               <Grid xs={12} item>
                 <Box className={classes.avatarContainer}>
-                  <UserAvatar publicId={ticketUser.avatar} online={true} />
+                  <UserAvatar publicId={ticket.user.avatar} online={true} />
                   <Link
                     to={`/users/${ticket.user}`}
                     className={classes.userNameLink}
@@ -90,7 +83,7 @@ const Ticket = () => {
                       variant="body2"
                       sx={{ marginLeft: "10px", fontWeight: "bold" }}
                     >
-                      {ticketUser.name}
+                      {ticket.user.name}
                     </Typography>
                   </Link>
                 </Box>

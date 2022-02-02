@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { ChevronRight } from "@mui/icons-material";
 import SettingsMenu from "./SettingsMenu";
-import NavMenu from "./NavMenu";
 import { useNavigate } from "react-router-dom";
 import SettingsMenuDrawer from "./SettingsMenuDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -45,12 +44,6 @@ const Navbar = (props) => {
             </Typography>
 
             <Hidden smUp>
-              {/* <NavMenu
-                onClick={() => setOpenDrawer(true)}
-                anchorElNav={anchorElNav}
-                setAnchorElNav={setAnchorElNav}
-                handleCloseNavMenu={handleCloseNavMenu}
-              /> */}
               <IconButton
                 color="secondary"
                 size="large"

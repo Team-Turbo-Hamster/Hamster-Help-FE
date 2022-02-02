@@ -10,7 +10,6 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import useAuth from "../contexts/useAuth";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -30,11 +29,11 @@ const Login = () => {
       "Password must be 6-30 characters long, must contain only letters, numbers and special characters(!@#$%^&*) and must contain at least one uppercase letter, one lowercase letter and one number",
   };
   const tests = {
-    username: /^[a-zA-Z\s-]{4,15}$/,
+    username: /^[a-zA-Z0-9\s-]{4,15}$/,
     password: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^[a-zA-Z0-9!@#$%^&*]{6,30}$/,
   };
 
-  const { signIn, user } = useAuth();
+  const { signIn } = useAuth();
 
   const handleChange = (prop) => (event) => {
     event.preventDefault();
@@ -43,7 +42,7 @@ const Login = () => {
     test.test(values[prop])
       ? setTestsPassed({ ...testsPassed, [prop]: true })
       : setTestsPassed({ ...testsPassed, [prop]: false });
-    console.log(testsPassed);
+
     testsPassed.username && testsPassed.password
       ? setButtonDisabled(false)
       : setButtonDisabled(true);
@@ -58,7 +57,7 @@ const Login = () => {
       ? setButtonDisabled(false)
       : setButtonDisabled(true);
 
-    console.log(testsPassed);
+
   };
 
   const HelperText = (prop) => {
