@@ -31,7 +31,10 @@ const TicketsTabs = ({ tickets }) => {
   return (
     <Container maxWidth="md">
       <TabContext value={tabValue}>
-        <Box sx={{ width: "100%" }}>
+        <Box
+          sx={{ width: "100%" }}
+          sx={(theme) => ({ marginBottom: theme.spacing(2) })}
+        >
           <TabList indicatorColor="primary" onChange={handleTabChange}>
             <Tab value="1" label="Opened" />
             <Tab value="2" label="Closed" />

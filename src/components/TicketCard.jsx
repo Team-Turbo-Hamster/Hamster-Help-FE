@@ -21,6 +21,7 @@ import * as moment from "moment";
 import { useNavigate } from "react-router-dom";
 import UserAvatar from "./UserAvatar";
 import useAuth from "../contexts/useAuth";
+import CardWrap from "../components/CardWrap";
 
 const TicketCard = ({ ticket }) => {
   const [userTicket, setUserTicket] = useState(null);
@@ -36,8 +37,6 @@ const TicketCard = ({ ticket }) => {
     getUserById(ticket.user).then((data) => setUserTicket(data));
   }, [ticket]);
 
-  console.log(ticket);
-
   const VisibleCard = userTicket ? (
     <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
       <Grid container className={classes.ticketContainer}>
@@ -47,17 +46,30 @@ const TicketCard = ({ ticket }) => {
         <Grid item xs={10} sm={11}>
           <Grid container className={classes.ticketContent}>
             <Grid item xs={12}>
-              <Typography variant="body1">{userTicket.name}</Typography>
+              <Typography
+                variant="body1"
+                sx={(theme) => ({
+                  color: theme.palette.primary.dark,
+                  fontWeight: "bold",
+                })}
+              >
+                {userTicket.name}
+              </Typography>
             </Grid>
             <Grid item className={classes.dateContainer}>
-              <span>
+              <Typography
+                variant="body2"
+                sx={(theme) => ({
+                  color: theme.palette.primary.dark,
+                })}
+              >
                 {ticket.created_at !== null
                   ? moment(
                       ticket.created_at.toString(),
                       "YYYYMMDD HH:mm:ss"
                     ).fromNow()
                   : "just now..."}
-              </span>
+              </Typography>
             </Grid>
             <Grid item xs={12} className={classes.titleContainer}>
               <Typography variant="h5" sx={{ fontWeight: "bold" }}>
@@ -78,8 +90,10 @@ const TicketCard = ({ ticket }) => {
                 {ticket.resolved && <Chip label="Closed" color="secondary" />}
               </Box>
               <Box className={classes.commentsContainer}>
-                <Badge color="secondary" badgeContent={ticket.comments.length}>
-                  <ChatBubble />
+                <Badge color="primary" badgeContent={ticket.comments.length}>
+                  <ChatBubble
+                    sx={(theme) => ({ color: theme.palette.primary.dark })}
+                  />
                 </Badge>
               </Box>
             </Grid>
@@ -94,7 +108,12 @@ const TicketCard = ({ ticket }) => {
   const HiddenCard = (
     <CardActionArea onClick={() => setPrivateTicketError(true)}>
       <Box className={classes.privateTicketContainer}>
-        <Typography variant="h4">This is a private ticket</Typography>
+        <Typography
+          variant="h4"
+          sx={(theme) => ({ color: theme.palette.primary.dark })}
+        >
+          This is a private ticket
+        </Typography>
         {privateTicketError && (
           <Typography variant="body2" color="error">
             Only tutors can access it
@@ -104,9 +123,9 @@ const TicketCard = ({ ticket }) => {
     </CardActionArea>
   );
   return (
-    <Card className={classes.cardContainer} elevation={3}>
+    <CardWrap className={classes.cardWrapContainer} elevation={3}>
       {ticket.isPrivate === false || seePrivate ? VisibleCard : HiddenCard}
-    </Card>
+    </CardWrap>
   );
 };
 export default TicketCard;

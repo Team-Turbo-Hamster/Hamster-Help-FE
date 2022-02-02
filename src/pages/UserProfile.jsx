@@ -9,6 +9,7 @@ import useAuth from "../contexts/useAuth";
 import { getTicketsByUserId } from "../utils/ticketRequests";
 import TicketsTabs from "../components/TicketsTabs";
 import { ConstructionOutlined } from "@mui/icons-material";
+import CardWrap from "../components/CardWrap";
 
 const UserProfile = () => {
   const [visitedUser, setVisitedUser] = useState(null);
@@ -37,18 +38,18 @@ const UserProfile = () => {
       });
     }
 
+    console.log(visitedUser, "========================");
+
     return () => {
       cancel = true;
     };
   }, [visitedUser]);
 
-  console.log(visitedUser);
-
   return (
     <Container maxWidth="md">
       {visitedUser ? (
         <>
-          <Paper elevation={3} className={classes.paperContainer}>
+          <CardWrap className={classes.paperContainer}>
             <Grid container className={classes.container}>
               <Grid item className={classes.headerContainer}>
                 <UserAvatar
@@ -57,15 +58,25 @@ const UserProfile = () => {
                   availableAvatar={visitedUser.avatar}
                   online={true}
                 />
-                <Typography variant="h4">{visitedUser.name}</Typography>
-                <Typography variant="body1">@{visitedUser.username}</Typography>
+                <Typography
+                  variant="h4"
+                  sx={(theme) => ({ color: theme.palette.primary.dark })}
+                >
+                  {visitedUser.name}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={(theme) => ({ color: theme.palette.primary.dark })}
+                >
+                  @{visitedUser.username}
+                </Typography>
                 <Box className={classes.badge}>
                   <UserRoleBadge role={visitedUser.role} />
                 </Box>
               </Grid>
               <Grid item></Grid>
             </Grid>
-          </Paper>
+          </CardWrap>
 
           <Box className={classes.myTicketsContainer}>
             <TicketsTabs tickets={userTickets} />

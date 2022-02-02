@@ -50,6 +50,22 @@ const useStyles = makeStyles((theme) => ({
   privateChipContainer: {
     marginTop: theme.spacing(2),
   },
+
+  headerCardWrap: {
+    width: "80%",
+  },
+  buttonCardWrap: {
+    width: "100%",
+    display: "flex",
+  },
+  headerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ticketBodyWrap: {
+    marginTop: theme.spacing(4),
+  },
 }));
 
 export default useStyles;
