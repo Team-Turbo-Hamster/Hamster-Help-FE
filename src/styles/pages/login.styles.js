@@ -17,7 +17,66 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
 
+  mobileTitleContainer: {
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    direction: "column",
+    fontSize: "5rem",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textShadow: "2px 2px #2b6777",
+    color: theme.palette.primary.light,
+  },
+  mobileTitleText: {
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "1.5rem",
+  },
+
+  smallTitleContainer: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+    display: "flex",
+    alignItems: "flex-start",
+    textShadow: "2px 2px #2b6777",
+    color: theme.palette.primary.light,
+  },
+
   titleContainer: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textShadow: "2px 2px #2b6777",
+    color: theme.palette.primary.light,
+    fontSize: "5rem",
+    fontWeight: 900,
+  },
+
+  smallTitleText: {
+    fontWeight: 400,
+    fontSize: "2rem",
+    paddingLeft: theme.spacing(4),
+    paddingTop: theme.spacing(4),
+  },
+
+  titleText: {
+    fontWeight: 900,
+    fontSize: "5rem",
+  },
+
+  textBodyContainer: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
+    marginTop: theme.spacing(2),
+    alignSelf: "center",
+    maxWidth: "50%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -26,8 +85,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.light,
   },
 
-  titleText: {
-    fontWeight: 900,
+  smallText: {
+    fontSize: "1rem",
   },
 
   bodyLeft: {
@@ -45,9 +104,10 @@ const useStyles = makeStyles((theme) => ({
   bodyRight: {
     [theme.breakpoints.down("md")]: {
       minHeight: "50vh",
+      width: "100%",
       background: theme.palette.secondary.main,
     },
-    width: "100%",
+
     [theme.breakpoints.up("md")]: {
       width: "50%",
     },
@@ -66,8 +126,20 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.secondary.light,
   },
 
+  button: {
+    backgroundColor: "#2ea08e",
+  },
+
+  logoContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
   logo: {
     paddingRight: theme.spacing(8),
+    width: "100%",
+    height: "auto",
   },
 }));
 
