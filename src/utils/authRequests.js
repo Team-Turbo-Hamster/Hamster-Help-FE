@@ -34,7 +34,10 @@ export const loadUser = async (token) => {
 
 export const registerUser = async (userForm) => {
   try {
-    const user = await axios.post(`/api/users`, userForm);
+    const user = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users`,
+      userForm
+    );
 
     return user.data.user;
   } catch (error) {
