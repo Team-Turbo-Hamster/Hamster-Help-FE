@@ -4,6 +4,7 @@ import useStyles from "../styles/pages/tag-page.styles";
 import { Grid, Container, Typography, Paper } from "@mui/material";
 import { getTicketsByTag } from "../utils/ticketRequests";
 import TicketsTabs from "../components/TicketsTabs";
+import CardWrap from "../components/CardWrap";
 
 const TagPage = () => {
   const [tickets, setTickets] = useState([]);
@@ -26,9 +27,16 @@ const TagPage = () => {
     <Container maxWidth="md">
       <Grid container>
         <Grid item xs={12}>
-          <Paper className={classes.paperContainer} elevation={3}>
-            <Typography variant="h3">#{tag_name}</Typography>
-          </Paper>
+          <CardWrap className={classes.paperContainer}>
+            <Typography
+              sx={(theme) => ({
+                color: theme.palette.primary.dark,
+              })}
+              variant="h3"
+            >
+              #{tag_name}
+            </Typography>
+          </CardWrap>
         </Grid>
         <Grid item xs={12}>
           <TicketsTabs tickets={tickets} />

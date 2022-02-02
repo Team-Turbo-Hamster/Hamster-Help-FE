@@ -72,7 +72,11 @@ const Navbar = (props) => {
           onClose={() => setOpenDrawer(false)}
           anchor="right"
         >
-          <div>
+          <Box
+            sx={(theme) => ({
+              background: theme.palette.primary.main,
+            })}
+          >
             <IconButton
               color="secondary"
               size="large"
@@ -81,12 +85,12 @@ const Navbar = (props) => {
               aria-haspopup="true"
               onClick={() => setOpenDrawer(false)}
               sx={(theme) => ({
-                color: theme.palette.primary.main,
+                color: theme.palette.primary.dark,
               })}
             >
               <ChevronRight />
             </IconButton>
-          </div>
+          </Box>
           <Divider />
           <SettingsMenuDrawer setOpenDrawer={setOpenDrawer} />
         </SwipeableDrawer>

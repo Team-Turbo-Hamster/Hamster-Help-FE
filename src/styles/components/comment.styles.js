@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dateSpan: {
     marginLeft: theme.spacing(1),
+    color: "#ccc",
   },
   commentUsernameLink: {
     marginRight: theme.spacing(1),
@@ -30,10 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
   bodyContainer: {
     width: "100%",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
+    border: `2px solid ${theme.palette.primary.light}`,
+    borderRadius: "15px",
     padding: theme.spacing(1),
     color: blueGrey[900],
+  },
+  nameContainer: {
+    color: theme.palette.primary.dark,
+    marginRight: theme.spacing(1),
   },
 }));
 

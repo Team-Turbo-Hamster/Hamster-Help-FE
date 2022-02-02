@@ -13,11 +13,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(2),
   },
   bodyPaper: {
     padding: theme.spacing(2),
     margin: theme.spacing(4, 0, 4, 0),
+    borderRadius: "15px",
+    width: "100%",
+    border: `2px solid ${theme.palette.primary.light}`,
   },
   avatarContainer: {
     display: "flex",
@@ -52,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   headerCardWrap: {
-    width: "80%",
+    width: "100%",
   },
   buttonCardWrap: {
     width: "100%",
@@ -64,7 +67,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   ticketBodyWrap: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(2),
+    width: "100%",
+  },
+  commentsCardWrap: {
+    width: "100%",
+    marginTop: theme.spacing(2),
   },
 }));
 
