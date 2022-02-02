@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.light,
   },
 
+  titleText: {
+    fontWeight: 900,
+  },
+
   bodyLeft: {
     [theme.breakpoints.down("md")]: {
       minHeight: "50vh",

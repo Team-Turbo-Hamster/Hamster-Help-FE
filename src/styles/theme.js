@@ -26,10 +26,6 @@ export const ColorModeContextProvider = ({ children }) => {
         typography: {
           fontFamily: "Lato",
           fontSize: 14,
-          fontWeightLight: 300,
-          fontWeightMedium: 400,
-          fontWeightRegular: 500,
-          fontWeightBold: 900,
         },
         palette: {
           mode,

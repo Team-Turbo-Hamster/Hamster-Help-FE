@@ -22,15 +22,16 @@ const LoginPage = () => {
       <Grid item md={6} className={classes.bodyLeft}>
         <Stack>
           <Grid item className={classes.titleContainer}>
-            <Typography className="titleText" variant="h2">
+            <h2 sx={{ fontweight: 900 }} className={classes.titleText}>
               Welcome to Hamster Help
-            </Typography>
+            </h2>
           </Grid>
           <Grid item>
             <img className={classes.logo} src={logo} width={"100%"} height={"auto"} alt="Logo" />
           </Grid>
         </Stack>
       </Grid>
+      ariant="h2"
       <Grid className={classes.bodyRight}>
         <Stack className={classes.formStack} spacing={4}>
           <Button className={classes.button} variant="contained">
