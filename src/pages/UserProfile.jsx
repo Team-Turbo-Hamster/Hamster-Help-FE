@@ -8,6 +8,7 @@ import UserRoleBadge from "../components/UserRoleBadge";
 import useAuth from "../contexts/useAuth";
 import { getTicketsByUserId } from "../utils/ticketRequests";
 import TicketsTabs from "../components/TicketsTabs";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const UserProfile = () => {
   const [visitedUser, setVisitedUser] = useState(null);
@@ -40,6 +41,8 @@ const UserProfile = () => {
       cancel = true;
     };
   }, [visitedUser]);
+
+  console.log(visitedUser);
 
   return (
     <Container maxWidth="md">

@@ -36,6 +36,8 @@ const TicketCard = ({ ticket }) => {
     getUserById(ticket.user).then((data) => setUserTicket(data));
   }, [ticket]);
 
+  console.log(ticket);
+
   const VisibleCard = userTicket ? (
     <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
       <Grid container className={classes.ticketContainer}>
@@ -73,6 +75,7 @@ const TicketCard = ({ ticket }) => {
             <Grid item xs={12} className={classes.socialsContainer}>
               <Box className={classes.privateContainer}>
                 {ticket.isPrivate && <Chip label="Private" color="error" />}
+                {ticket.resolved && <Chip label="Closed" color="secondary" />}
               </Box>
               <Box className={classes.commentsContainer}>
                 <Badge color="secondary" badgeContent={ticket.comments.length}>

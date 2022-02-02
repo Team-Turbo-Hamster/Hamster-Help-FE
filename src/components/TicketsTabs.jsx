@@ -11,13 +11,15 @@ const TicketsTabs = ({ tickets }) => {
   useEffect(() => {
     let resolved = [];
     let unresolved = [];
-    tickets.forEach((ticket) => {
-      if (ticket.resolved) {
-        resolved.push(ticket);
-      } else {
-        unresolved.push(ticket);
-      }
-    });
+    if (tickets) {
+      tickets.forEach((ticket) => {
+        if (ticket.resolved) {
+          resolved.push(ticket);
+        } else {
+          unresolved.push(ticket);
+        }
+      });
+    }
     setResolvedTickets(resolved);
     setUnResolvedTickets(unresolved);
   }, [tickets]);
