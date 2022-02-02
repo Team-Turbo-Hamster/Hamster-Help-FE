@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const createUser = async (formData) => {
   try {
+    console.log(formData);
     const res = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/api/users`,
       formData
