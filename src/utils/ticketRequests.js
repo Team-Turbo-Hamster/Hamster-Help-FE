@@ -7,6 +7,7 @@ export const getTicketById = async (ticket_id) => {
         Authorization: "Bearer " + localStorage.getItem("user-token"),
       },
     });
+    console.log(ticket);
     return ticket.data.ticket;
   } catch (error) {
     console.log(error);

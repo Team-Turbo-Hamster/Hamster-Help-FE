@@ -1,7 +1,7 @@
 import React from "react";
 import TicketCard from "./TicketCard";
 
-const TicketsList = ({ tickets }) => {
+const TicketsList = ({ tickets = [] }) => {
   return (
     <div>
       {tickets.map((ticket) => (

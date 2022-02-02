@@ -35,8 +35,9 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
       console.log("Watching ticket ", ticket_id);
     });
 
-    socket.on("new-comment", ({ ticket }) => {
-      setTicket(ticket);
+    socket.on("new-comment", ({ updatedTicket }) => {
+      console.log(updatedTicket);
+      setTicket(updatedTicket);
     });
 
     socket.emit("watch-ticket", { token, ticket_id: ticket.id });
