@@ -1,26 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Grid, Typography, Divider, Button } from "@mui/material";
 import useStyles from "../styles/components/comment-section.styles";
 import useAuth from "../contexts/useAuth";
 import UserAvatar from "./UserAvatar";
 import Comment from "./Comment";
 import { postComment } from "../utils/commentsRequests";
+import { SocketContext } from "../contexts/socket";
 
 const TicketCommentSection = ({ ticket, setTicket }) => {
   const [commentState, setCommentState] = useState("");
   const classes = useStyles();
   const { user } = useAuth();
-
+  const socket = useContext(SocketContext);
   const onSubmitComment = (e) => {
+    const token = localStorage.getItem("user-token");
     e.preventDefault();
     if (commentState > "") {
-      postComment(ticket._id, commentState).then((data) => {
-        setTicket(data);
+      // postComment(ticket._id, commentState).then((data) => {
+      //   setTicket(data);
+      // });
+      socket.emit("new-comment", {
+        token,
+        ticket_id: ticket.id,
+        comment: commentState,
       });
     } else {
       console.error("comment section must not be empty");
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("user-token");
+    socket.on("ticket-watched", ({ ticket_id }) => {
+      console.log("Watching ticket ", ticket_id);
+    });
+
+    socket.on("new-comment", ({ updatedTicket }) => {
+      console.log(updatedTicket);
+      setTicket(updatedTicket);
+    });
+
+    socket.emit("watch-ticket", { token, ticket_id: ticket.id });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  }, []);
 
   return (
     <>
