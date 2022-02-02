@@ -22,14 +22,19 @@ const Register = () => {
           </Grid>
         </Stack>
       </Grid>
-      <Grid item className={classes.bodyRight}>
-        <Stack className={classes.formStack}>
-          <div>
+      <Grid container className={classes.bodyRight}>
+        <Stack>
+          <Grid item>
+            <Typography className={classes.mobileTitleText} variant="h5">
+              Please register for access
+            </Typography>
+          </Grid>
+          <Grid item className={classes.formStack}>
             <Registration />
-          </div>
-          <Button variant="contained" onClick={() => navigate("/login")}>
-            Login
-          </Button>
+            <Button className={classes.button} variant="contained" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+          </Grid>
         </Stack>
       </Grid>
     </Grid>
