@@ -22,6 +22,7 @@ import Tag from "../components/Tag";
 import ImageGallery from "../components/ImageGallery";
 import UserAvatar from "../components/UserAvatar";
 import useAuth from "../contexts/useAuth";
+import TicketCommentSection from "../components/TicketCommentSection";
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -130,10 +131,8 @@ const Ticket = () => {
               <Grid xs={12} item className={classes.gridItem}>
                 <ImageGallery images={ticket.images} />
               </Grid>
-              <Grid xs={12} item className={classes.gridItem}>
-                <Grid container>
-                  <Grid item></Grid>
-                </Grid>
+              <Grid xs={12} item className={classes.commentSectionContainer}>
+                <TicketCommentSection ticket={ticket} setTicket={setTicket} />
               </Grid>
             </Grid>
           </Grid>
