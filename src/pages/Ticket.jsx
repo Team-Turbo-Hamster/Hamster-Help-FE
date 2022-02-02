@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Grid, Container, Typography, Paper, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import useStyles from "../styles/pages/ticket.styles";

@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
       socket.on("reauthenticated", () => {
         setUser(jwt_decode(token));
       });
-      socket.emit("reuauthenticate", { token });
+      socket.emit("reauthenticate", { token });
       setLoadingInitial(false);
     } else {
       setLoadingInitial(false);
