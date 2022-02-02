@@ -2,7 +2,10 @@ import axios from "axios";
 
 export const createUser = async (formData) => {
   try {
-    const res = await axios.post("/api/users", formData);
+    const res = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users`,
+      formData
+    );
 
     return res.data.user;
   } catch (error) {
@@ -12,7 +15,9 @@ export const createUser = async (formData) => {
 
 export const getAllUsers = async () => {
   try {
-    const res = await axios.get("/api/users");
+    const res = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/users`
+    );
 
     return res.data.users;
   } catch (error) {
