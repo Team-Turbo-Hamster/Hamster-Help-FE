@@ -203,23 +203,6 @@ const NewUserForm = () => {
           label="Email address"
           helpertext="Please enter your email address"
           onBlur={handleBlur("email")}
-          label="Name"
-          helpertext="Please enter your name"
-          onBlur={handleBlur("name")}
-          onChange={handleChange("name")}
-        />
-        {handleHelperText("name", "name must be 4-15 characters long")}
-      </FormControl>
-      <br />
-      {/* Email field*/}
-      {/* _______________________________________________________ */}
-      <FormControl sx={{ m: 1, width: "30ch" }}>
-        <InputLabel>Email address</InputLabel>
-        <OutlinedInput
-          id="emailField"
-          label="Email address"
-          helpertext="Please enter your email address"
-          onBlur={handleBlur("email")}
           onChange={handleChange("email")}
         />
         {handleHelperText("email", 'Email must be a valid email address; "example@domain.tag"')}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Grid,
   Container,
@@ -24,7 +24,9 @@ import ImageGallery from "../components/ImageGallery";
 import UserAvatar from "../components/UserAvatar";
 import useAuth from "../contexts/useAuth";
 import TicketCommentSection from "../components/TicketCommentSection";
+
 import CardWrap from "../components/CardWrap";
+
 
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
@@ -49,17 +51,10 @@ const Ticket = () => {
 
   useEffect(() => {
     getTicketById(ticket_id).then((data) => {
+      console.log(data);
       setTicket(data);
     });
-  }, [ticket_id]);
-
-  useEffect(() => {
-    if (ticket) {
-      getUserById(ticket.user).then((data2) => {
-        setTicketUser(data2);
-      });
-    }
-  }, [ticket]);
+  }, []);
 
   const submitResolveTicket = () => {
     resolveTicket(ticket._id).then((data) => {
@@ -73,7 +68,7 @@ const Ticket = () => {
 
   return (
     <Container maxWidth="md">
-      {ticket && ticketUser ? (
+      {ticket ? (
         <Grid container className={classes.ticketContainer}>
           {/* <CardWrap> */}
           <Grid item xs={12} className={classes.gridItem}>
@@ -86,6 +81,7 @@ const Ticket = () => {
                       color: theme.palette.primary.dark,
                       fontWeight: "bold",
                     })}
+
                   >
                     {ticket.title}
                   </Typography>

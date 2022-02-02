@@ -112,6 +112,7 @@ const CreateTicket = () => {
       console.log("Error!", error);
     });
     socket.on("new-ticket", ({ ticket }) => {
+      console.log(ticket);
       navigate(`/tickets/${ticket._id}`);
     });
 
