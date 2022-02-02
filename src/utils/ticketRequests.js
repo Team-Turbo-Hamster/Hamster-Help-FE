@@ -79,6 +79,7 @@ export const resolveTicket = async (ticket_id) => {
         },
       }
     );
+    console.log(ticket);
 
     return ticket.data.ticket;
   } catch (error) {

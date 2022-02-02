@@ -3,7 +3,7 @@ import axios from "axios";
 export const authenticate = async (details) => {
   try {
     const res = await axios.post("/api/users/authenticate", {
-      email: details.username,
+      username: details.username,
       password: details.password,
     });
     return res.data;
