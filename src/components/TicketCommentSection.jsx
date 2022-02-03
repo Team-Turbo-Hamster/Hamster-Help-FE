@@ -36,7 +36,6 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
     });
 
     socket.on("new-comment", ({ updatedTicket }) => {
-      console.log(updatedTicket);
       setTicket(updatedTicket);
     });
 
