@@ -27,7 +27,6 @@ import TicketCommentSection from "../components/TicketCommentSection";
 
 import CardWrap from "../components/CardWrap";
 
-
 const Ticket = () => {
   const [ticket, setTicket] = useState(null);
   const [ticketUser, setTicketUser] = useState(null);
@@ -62,13 +61,22 @@ const Ticket = () => {
       setTicket(data);
     });
   };
+
+  useEffect(() => {
+    if (ticket) {
+      getUserById(ticket.user).then((data2) => {
+        setTicketUser(data2);
+      });
+    }
+  }, [ticket]);
+
   const submitUnResolveTicket = () => {
     unResolveTicket(ticket._id).then((data) => setTicket(data));
   };
 
   return (
     <Container maxWidth="md">
-      {ticket ? (
+      {ticket && ticketUser ? (
         <Grid container className={classes.ticketContainer}>
           {/* <CardWrap> */}
           <Grid item xs={12} className={classes.gridItem}>
@@ -81,7 +89,6 @@ const Ticket = () => {
                       color: theme.palette.primary.dark,
                       fontWeight: "bold",
                     })}
-
                   >
                     {ticket.title}
                   </Typography>

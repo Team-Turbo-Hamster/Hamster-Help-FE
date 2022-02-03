@@ -37,6 +37,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
+    "start-dev": "export HOST=localhost && react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
