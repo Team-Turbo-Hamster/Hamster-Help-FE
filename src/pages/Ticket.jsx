@@ -142,7 +142,7 @@ const Ticket = () => {
               <CardWrap secondary className={classes.buttonCardWrap}>
                 <Grid container>
                   <Grid xs={12} item className={classes.gridItem}>
-                    Zoom button
+                    <Button variant="outlined">Take me to video chat</Button>
                   </Grid>
                   <Grid xs={6} item className={classes.gridItem}>
                     <Button

@@ -83,6 +83,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     boxShadow: "2px 5px #78909c",
     background: theme.palette.secondary.light,
+    display: "flex",
+    flexDirection: "column",
   },
 
   avatar: {

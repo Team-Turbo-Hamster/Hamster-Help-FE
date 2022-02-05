@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    textShadow: "2px 2px #2b6777",
+    textShadow: `2px 2px ${theme.palette.primary.dark}`,
     color: theme.palette.primary.main,
   },
 }));

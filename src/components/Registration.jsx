@@ -9,6 +9,7 @@ import {
   IconButton,
   Alert,
   Avatar,
+  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import useStyles from "../styles/components/registerForm.styles";
@@ -82,7 +83,12 @@ const NewUserForm = () => {
 
   const closeSnack = (
     <>
-      <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleSnackbarClose}
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
@@ -153,20 +159,22 @@ const NewUserForm = () => {
 
   return (
     <form id="registerForm" onSubmit={handleSubmit}>
-      <Avatar className={classes.avatar} src={values.avatar} />
+      <Box className={classes.avatarContainer}>
+        <Avatar className={classes.avatar} src={values.avatar} />
 
-      <Button
-        className={classes.button}
-        variant="contained"
-        component="label"
-        accept=".png, .jpg, .jpeg"
-        type="file"
-        name="avatar"
-        onChange={handleFileInputChange}
-      >
-        Choose File
-        <input type="file" hidden />
-      </Button>
+        <Button
+          className={classes.button}
+          variant="contained"
+          component="label"
+          accept=".png, .jpg, .jpeg"
+          type="file"
+          name="avatar"
+          onChange={handleFileInputChange}
+        >
+          Choose File
+          <input type="file" hidden />
+        </Button>
+      </Box>
       <br />
       {/* Username field */}
       {/* _______________________________________________________ */}
@@ -179,7 +187,10 @@ const NewUserForm = () => {
           onBlur={handleBlur("username")}
           onChange={handleChange("username")}
         />
-        {handleHelperText("username", "username must be 1-30 characters long and contain only letters or spaces")}
+        {handleHelperText(
+          "username",
+          "username must be 1-30 characters long and contain only letters or spaces"
+        )}
       </FormControl>
       <br />
       <FormControl sx={{ m: 1, width: "30ch" }}>
@@ -205,7 +216,10 @@ const NewUserForm = () => {
           onBlur={handleBlur("email")}
           onChange={handleChange("email")}
         />
-        {handleHelperText("email", 'Email must be a valid email address; "example@domain.tag"')}
+        {handleHelperText(
+          "email",
+          'Email must be a valid email address; "example@domain.tag"'
+        )}
       </FormControl>
       <br />
       {/* Password field */}
@@ -267,7 +281,10 @@ const NewUserForm = () => {
       <br />
       {/* Tutor toggle */}
       {/* _______________________________________________________ */}
-      <FormControlLabel control={<Switch onChange={setTutor} />} label="I am a tutor" />
+      <FormControlLabel
+        control={<Switch onChange={setTutor} />}
+        label="I am a tutor"
+      />
       <br />
 
       <Button

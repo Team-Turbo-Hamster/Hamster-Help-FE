@@ -21,11 +21,11 @@ const StudentHomeOpt = () => {
         variant="contained"
         className={classes.button}
       >
-        Open Queue
+        View Queue
       </Button>
-      <Button variant="contained" className={classes.lastButton}>
+      {/* <Button variant="contained" className={classes.lastButton}>
         Open Stack
-      </Button>
+      </Button> */}
     </div>
   );
 };

@@ -30,14 +30,14 @@ export const ColorModeContextProvider = ({ children }) => {
         palette: {
           mode,
           primary: {
-            main: mode === "light" ? "#52ab98" : grey[800],
+            main: mode === "light" ? "#52ab98" : "#2b6777",
             light: mode === "light" ? "#c8d8e4" : grey[700],
             dark: mode === "light" ? "#2b6777" : grey[900],
           },
           secondary: {
-            main: mode === "light" ? blueGrey[500] : grey[800],
+            main: mode === "light" ? blueGrey[500] : grey[700],
             light: mode === "light" ? blueGrey[50] : grey[700],
-            dark: mode === "light" ? blueGrey[700] : grey[900],
+            dark: mode === "light" ? "#78909c" : grey[900],
           },
         },
       }),

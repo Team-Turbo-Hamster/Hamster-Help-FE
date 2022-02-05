@@ -56,7 +56,7 @@ export const getAllTickets = async () => {
 export const getUnresolvedTickets = async () => {
   try {
     const tickets = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/tickets/?resolved=false`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/tickets/unresolved`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("user-token"),
@@ -72,7 +72,7 @@ export const getUnresolvedTickets = async () => {
 export const getResolvedTickets = async () => {
   try {
     const tickets = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/api/tickets/?resolved=true`,
+      `${process.env.REACT_APP_BACKEND_URL}/api/tickets/resolved`,
       {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("user-token"),
