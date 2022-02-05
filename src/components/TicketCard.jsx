@@ -38,7 +38,7 @@ const TicketCard = ({ ticket }) => {
   }, [ticket]);
 
   const VisibleCard = userTicket ? (
-    <CardActionArea onClick={() => navigate(`/tickets/${ticket.id}`)}>
+    <CardActionArea onClick={() => navigate(`/tickets/${ticket._id}`)}>
       <Grid container className={classes.ticketContainer}>
         <Grid item>
           <UserAvatar publicId={userTicket.avatar} online={true} />

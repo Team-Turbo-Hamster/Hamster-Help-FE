@@ -10,7 +10,7 @@ const TutorHomeOpt = () => {
   return (
     <div className={classes.container}>
       <Button variant="contained" className={classes.button}>
-        Jump right in
+        Open first ticket
       </Button>
       <Button
         variant="contained"
@@ -19,7 +19,6 @@ const TutorHomeOpt = () => {
       >
         View Queue
       </Button>
-      <Typography variant="body1">5 tickets currently in the queue</Typography>
     </div>
   );
 };

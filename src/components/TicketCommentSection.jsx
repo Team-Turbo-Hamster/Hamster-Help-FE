@@ -12,6 +12,7 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
   const classes = useStyles();
   const { user } = useAuth();
   const socket = useContext(SocketContext);
+
   const onSubmitComment = (e) => {
     const token = localStorage.getItem("user-token");
     e.preventDefault();
@@ -21,13 +22,17 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
       // });
       socket.emit("new-comment", {
         token,
-        ticket_id: ticket.id,
+        ticket_id: ticket._id,
         comment: commentState,
       });
+
+      setCommentState("");
     } else {
       console.error("comment section must not be empty");
     }
   };
+
+  console.log(ticket, "999");
 
   useEffect(() => {
     const token = localStorage.getItem("user-token");
@@ -39,7 +44,7 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
       setTicket(updatedTicket);
     });
 
-    socket.emit("watch-ticket", { token, ticket_id: ticket.id });
+    socket.emit("watch-ticket", { token, ticket_id: ticket._id });
 
     return () => {
       socket.removeAllListeners();
@@ -71,14 +76,16 @@ const TicketCommentSection = ({ ticket, setTicket }) => {
         </Grid>
       </Grid>
       <Grid container>
-        {ticket.comments.map((comment, i) => (
-          <Comment
-            key={`${comment._id}${i}`}
-            ticketId={ticket._id}
-            comment={comment}
-            setTicket={setTicket}
-          />
-        ))}
+        {ticket.comments
+          .map((comment, i) => (
+            <Comment
+              key={`${comment._id}${i}`}
+              ticketId={ticket._id}
+              comment={comment}
+              setTicket={setTicket}
+            />
+          ))
+          .reverse()}
       </Grid>
     </>
   );

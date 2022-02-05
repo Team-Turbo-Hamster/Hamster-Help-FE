@@ -13,8 +13,8 @@ import useAuth from "../contexts/useAuth";
 
 const Login = () => {
   const [values, setValues] = useState({
-    username: "quatrelol",
-    password: "Qweqweqwe2",
+    username: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -56,8 +56,6 @@ const Login = () => {
     testsPassed.username && testsPassed.password
       ? setButtonDisabled(false)
       : setButtonDisabled(true);
-
-
   };
 
   const HelperText = (prop) => {
@@ -125,7 +123,7 @@ const Login = () => {
         {HelperText("password")}
       </FormControl>
       <br />
-      <Button variant="text" type="Submit">
+      <Button variant="contained" type="Submit">
         Submit
       </Button>
     </form>

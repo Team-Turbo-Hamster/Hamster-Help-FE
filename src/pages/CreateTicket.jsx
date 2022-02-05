@@ -19,6 +19,7 @@ import useAuth from "../contexts/useAuth";
 import { createTicket } from "../utils/ticketRequests";
 import ChipArray from "../components/ChipArray";
 import { SocketContext } from "../contexts/socket";
+import CardWrap from "../components/CardWrap";
 
 const CreateTicket = () => {
   const [title, setTitle] = useState("");
@@ -42,6 +43,7 @@ const CreateTicket = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
+  //TODO: change this
   const handleTagClick = (data) => {
     tagsInput.includes(data) ? (
       <></>
@@ -51,6 +53,8 @@ const CreateTicket = () => {
 
     validateTicket();
   };
+
+  console.log(tagsInput);
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -86,11 +90,11 @@ const CreateTicket = () => {
   };
 
   const submitTicket = () => {
-    const tagsArray = tagsInput.split(" ");
+    const tagsArray = tagsInput.trim().split(" ");
     const ticket = {
       title,
       body,
-      tags: tagsArray[0].length > 0 ? tagsArray : [],
+      tags: tagsArray.length > 0 ? tagsArray : [],
       images,
       isPrivate,
     };
@@ -123,117 +127,145 @@ const CreateTicket = () => {
 
   return (
     <Container maxWidth="md">
-      <Grid container>
-        <Grid item>
-          <h4>please provide a brief, meaningful title to your ticket:</h4>
-          <OutlinedInput
-            placeholder="Add title"
-            fullWidth
-            onChange={(e) => {
-              setTitle(e.target.value);
-              validateTicket();
-            }}
-            value={title}
-            sx={(theme) => ({
-              color:
-                errorInput && body.length < 1
-                  ? "red"
-                  : theme.palette.primary.main,
-            })}
-          />
-
-          {title.length > 0 && title.length < 101 ? (
-            <></>
-          ) : (
-            <Alert severity="error">
-              The Title be fewer than 100 characters and cannot be blank
-            </Alert>
-          )}
-
-          <h4>Please describe your issue in as much detail as you can: </h4>
-          <OutlinedInput
-            placeholder="Add ticket body"
-            fullWidth
-            onChange={(e) => {
-              setBody(e.target.value);
-              validateTicket();
-            }}
-            value={body}
-            multiline
-            minRows={4}
-            sx={(theme) => ({
-              color:
-                errorInput && body.length < 1
-                  ? "red"
-                  : theme.palette.primary.main,
-            })}
-          />
-          {body.length > 0 ? (
-            <></>
-          ) : (
-            <Alert severity="error">The ticket text cannot be blank</Alert>
-          )}
-
-          <h4>
-            Please add some tags to help categorise your issue (click on items
-            in the cloud or write into the box below):
-          </h4>
-
-          <ChipArray
-            tagsInput={tagsInput}
-            chipData={chipData}
-            handleTagClick={handleTagClick}
-          />
-
-          <OutlinedInput
-            placeholder="Add tags separated by space"
-            fullWidth
-            onChange={(e) => setTagsInput(e.target.value)}
-            value={tagsInput}
-            sx={(theme) => ({
-              color:
-                errorInput && body.length < 1
-                  ? "red"
-                  : theme.palette.primary.main,
-            })}
-          />
-          {tagCount()}
-
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  value={isPrivate}
-                  onChange={() => setIsPrivate(!isPrivate)}
-                  label="private"
-                />
-              }
-              label="Set as private"
+      <CardWrap className={classes.cardWrapContainer}>
+        <Grid container>
+          <Grid item>
+            <h4>please provide a brief, meaningful title to your ticket:</h4>
+            <OutlinedInput
+              placeholder="Add title"
+              fullWidth
+              onChange={(e) => {
+                setTitle(e.target.value);
+                validateTicket();
+              }}
+              value={title}
+              sx={(theme) => ({
+                color:
+                  errorInput && body.length < 1
+                    ? "red"
+                    : theme.palette.primary.main,
+              })}
             />
-          </FormGroup>
-        </Grid>
-        <Grid item>
-          {images.map((image, i) => (
-            <img key={i} width="100px" height="auto" src={image} />
-          ))}
-          {/* <img width="100" height="100" src={} /> */}
-          <input
-            accept=".png, .jpg, .jpeg"
-            type="file"
-            name="avatar"
-            onChange={handleFileInputChange}
-          />
-        </Grid>
-        {errorInput && (
-          <Typography variant="body2" sx={{ color: "red" }}>
-            Missing fields
-          </Typography>
-        )}
 
-        <Button onClick={submitTicket} disabled={buttonDisabled}>
-          Create ticket
-        </Button>
-      </Grid>
+            {title.length > 0 && title.length < 101 ? (
+              <></>
+            ) : (
+              <Alert severity="error">
+                The Title be fewer than 100 characters and cannot be blank
+              </Alert>
+            )}
+
+            <h4>Please describe your issue in as much detail as you can: </h4>
+            <OutlinedInput
+              placeholder="Add ticket body"
+              fullWidth
+              onChange={(e) => {
+                setBody(e.target.value);
+                validateTicket();
+              }}
+              value={body}
+              multiline
+              minRows={4}
+              sx={(theme) => ({
+                color:
+                  errorInput && body.length < 1
+                    ? "red"
+                    : theme.palette.primary.main,
+              })}
+            />
+            {body.length > 0 ? (
+              <></>
+            ) : (
+              <Alert severity="error">The ticket text cannot be blank</Alert>
+            )}
+
+            <h4>
+              Please add some tags to help categorise your issue (click on items
+              in the cloud or write into the box below):
+            </h4>
+
+            <ChipArray
+              tagsInput={tagsInput}
+              chipData={chipData}
+              handleTagClick={handleTagClick}
+            />
+
+            <OutlinedInput
+              placeholder="Add tags separated by space"
+              fullWidth
+              onChange={(e) => setTagsInput(e.target.value)}
+              value={tagsInput}
+              sx={(theme) => ({
+                color:
+                  errorInput && body.length < 1
+                    ? "red"
+                    : theme.palette.primary.main,
+              })}
+            />
+            {tagCount()}
+
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    value={isPrivate}
+                    onChange={() => setIsPrivate(!isPrivate)}
+                    label="private"
+                  />
+                }
+                label="Set as private"
+              />
+            </FormGroup>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={(theme) => ({ marginBottom: theme.spacing(2) })}
+          >
+            {/* <img width="100" height="100" src={} /> */}
+            <Button
+              className={classes.button}
+              variant="contained"
+              component="label"
+              accept=".png, .jpg, .jpeg"
+              type="file"
+              name="avatar"
+              onChange={handleFileInputChange}
+            >
+              Choose File
+              <input hidden type="file" />
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            {images.map((image, i) => (
+              <img key={i} width="100px" height="auto" src={image} />
+            ))}
+          </Grid>
+          {errorInput && (
+            <Typography variant="body2" sx={{ color: "red" }}>
+              Missing fields
+            </Typography>
+          )}
+          <Grid
+            item
+            xs={12}
+            sx={{
+              display: "flex",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              onClick={submitTicket}
+              disabled={buttonDisabled}
+              variant="contained"
+            >
+              Create ticket
+            </Button>
+          </Grid>
+        </Grid>
+      </CardWrap>
     </Container>
   );
 };

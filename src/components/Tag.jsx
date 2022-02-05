@@ -8,7 +8,7 @@ const Tag = ({ tag }) => {
   const classes = useStyles();
 
   return (
-    <Link to={`/tickets/tag/${tag.toLowerCase()}`} className={classes.link}>
+    <Link to={`/tickets/tag/${tag}`} className={classes.link}>
       <Paper
         sx={{
           backgroundColor: teal[500],

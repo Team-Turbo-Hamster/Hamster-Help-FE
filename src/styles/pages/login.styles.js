@@ -86,7 +86,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   smallText: {
-    fontSize: "1rem",
+    fontSize: "1.5rem",
+    color: theme.palette.primary.light,
   },
 
   bodyLeft: {

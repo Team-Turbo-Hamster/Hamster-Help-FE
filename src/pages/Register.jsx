@@ -18,7 +18,13 @@ const Register = () => {
             </Typography>
           </Grid>
           <Grid item>
-            <img className={classes.logo} src={logo} width={"100%"} height={"auto"} alt="Logo" />
+            <img
+              className={classes.logo}
+              src={logo}
+              width={"100%"}
+              height={"auto"}
+              alt="Logo"
+            />
           </Grid>
         </Stack>
       </Grid>
@@ -31,7 +37,11 @@ const Register = () => {
           </Grid>
           <Grid item className={classes.formStack}>
             <Registration />
-            <Button className={classes.button} variant="contained" onClick={() => navigate("/login")}>
+            <Button
+              className={classes.button}
+              variant="text"
+              onClick={() => navigate("/login")}
+            >
               Login
             </Button>
           </Grid>

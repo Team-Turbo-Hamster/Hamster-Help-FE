@@ -1,30 +1,34 @@
-import {Paper, Chip, ListItem} from '@mui/material'
+import { ClassNames } from "@emotion/react";
+import { Paper, Chip, ListItem } from "@mui/material";
 
-const ChipArray = ({tagsInput, chipData, handleTagClick}) =>{
-    return(  <Paper
+const ChipArray = ({ tagsInput, chipData, handleTagClick }) => {
+  return (
+    <Paper
       sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        listStyle: 'none',
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        flexWrap: "wrap",
+        listStyle: "none",
         p: 0.5,
         m: 0,
       }}
-      component="ul"
+      component="div"
     >
       {chipData.map((data) => {
-        
         return (
-           <ListItem key={data.key}>
-            <Chip variant={tagsInput.includes(data.label) ? "filled" : "outlined"}
-              label={data.label}
-              onClick={() => {handleTagClick(data.label)}}
-            />
-           </ListItem>
+          <Chip
+            key={data.key}
+            variant={tagsInput?.includes(data.label) ? "filled" : "outlined"}
+            label={data.label}
+            onClick={() => {
+              handleTagClick(data.label);
+            }}
+          />
         );
       })}
-    </Paper>)
-    }
+    </Paper>
+  );
+};
 
-
-export default ChipArray
+export default ChipArray;

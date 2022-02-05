@@ -22,6 +22,7 @@ const Queue = () => {
     socket.on("reauthenticated", () => {
       console.log("reauthenticated");
     });
+
     socket.on("new-ticket", ({ ticket }) => {
       console.log("New Ticket received", ticket);
       setTickets((currentTickets) => {
